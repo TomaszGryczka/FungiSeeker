@@ -52,4 +52,4 @@ jobs:
           app-name: 'fungi-seeker-backend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B757D2AA4AED4B90807A4BC379B04446 }}
-          package: '*.war'
+          package: '*.jar'
