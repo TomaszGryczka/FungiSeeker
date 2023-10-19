@@ -9,5 +9,8 @@ docker-build:
     - cd ./frontend
     - docker build --pull -t "$CI_REGISTRY_FRONTEND_IMAGE" .
     - docker push "$CI_REGISTRY_FRONTEND_IMAGE"
+    - cd ../backend
+    - docker build --pull -t "$CI_REGISTRY_BACKEND_IMAGE" .
+    - docker push "$CI_REGISTRY_BACKEND_IMAGE"
   only:
     - main
