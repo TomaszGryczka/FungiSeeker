@@ -1,3 +1,3 @@
 export const environment = {
-  backendApiUrl: 'https://fungi-seeker-backend.wittybay-3270c2f5.germanywestcentral.azurecontainerapps.io',
+  backendApiUrl: 'https://fungi-seeker-backend.azurewebsites.net/api/main-menu',
 };
