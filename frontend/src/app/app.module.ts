@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {MainMenuModule} from "./main-menu/main-menu.module";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {AuthModule} from "@auth0/auth0-angular";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,14 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    AuthModule.forRoot({
+      domain: 'dev-roai3azcgz2xd5bu.eu.auth0.com',
+      clientId: 'TAN3vn3OVqkTpvIa8b7TlOrPDsuurhPk',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
