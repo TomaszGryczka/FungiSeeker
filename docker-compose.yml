@@ -26,6 +26,14 @@ services:
     networks:
       - network
 
+    # env file contains four variables:
+    # FUNGI_SEEKER_MYSQL_HOST
+    # FUNGI_SEEKER_MYSQL_PORT
+    # FUNGI_SEEKER_MYSQL_USERNAME
+    # FUNGI_SEEKER_MYSQL_PASSWORD
+    env_file:
+      - .environment_variables
+
 networks:
   network:
     driver: bridge
