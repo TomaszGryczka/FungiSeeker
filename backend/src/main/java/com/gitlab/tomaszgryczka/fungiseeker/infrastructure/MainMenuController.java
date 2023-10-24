@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@CrossOrigin(origins = "https://fungi-seeker-frontend.azurewebsites.net")
+@CrossOrigin(origins = {"https://fungi-seeker-frontend.azurewebsites.net", "http://localhost:4200"})
 @RequestMapping("/api")
 @RestController
 public class MainMenuController {
