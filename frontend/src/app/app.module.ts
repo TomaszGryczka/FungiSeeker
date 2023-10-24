@@ -1,11 +1,11 @@
-import { NgModule, isDevMode } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {isDevMode, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {MainMenuModule} from "./main-menu/main-menu.module";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from "@auth0/auth0-angular";
 
 @NgModule({
@@ -14,6 +14,7 @@ import {AuthModule} from "@auth0/auth0-angular";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MainMenuModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -22,7 +23,6 @@ import {AuthModule} from "@auth0/auth0-angular";
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    NoopAnimationsModule,
     AuthModule.forRoot({
       domain: 'dev-roai3azcgz2xd5bu.eu.auth0.com',
       clientId: 'TAN3vn3OVqkTpvIa8b7TlOrPDsuurhPk',
@@ -34,4 +34,5 @@ import {AuthModule} from "@auth0/auth0-angular";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
