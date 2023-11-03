@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {MainMenuGateway} from "./main-menu-gateway.service";
+import {AuthService} from "@auth0/auth0-angular";
 
 @Component({
   selector: 'main-menu',
@@ -7,16 +8,33 @@ import {MainMenuGateway} from "./main-menu-gateway.service";
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent implements OnInit {
-  title = "empty";
+
+  title = "";
   isLoading = true;
 
-  constructor(private mainMenuGateway: MainMenuGateway) {
+  loadingLastMushroomHunting = true;
+  loadedLastMushroomHunting = "";
+
+  constructor(private mainMenuGateway: MainMenuGateway,
+              private auth: AuthService) {
   }
 
   ngOnInit(): void {
-    this.mainMenuGateway.fetchMainMenuTitle().subscribe((title) => {
-      this.title = title;
+    this.initTitle();
+    this.loadLastMushroomHunting();
+  }
+
+  private initTitle(): void {
+    this.auth.user$.subscribe((user) => {
+      this.title = "Witaj, " + user?.name + "!";
       this.isLoading = false;
+    });
+  }
+
+  private loadLastMushroomHunting(): void {
+    this.mainMenuGateway.fetchMainMenuTitle().subscribe((hunting) => {
+      this.loadedLastMushroomHunting = hunting;
+      this.loadingLastMushroomHunting = false;
     });
   }
 }

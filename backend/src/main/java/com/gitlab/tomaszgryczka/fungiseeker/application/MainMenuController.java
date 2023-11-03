@@ -1,4 +1,4 @@
-package com.gitlab.tomaszgryczka.fungiseeker.infrastructure;
+package com.gitlab.tomaszgryczka.fungiseeker.application;
 
 import com.gitlab.tomaszgryczka.fungiseeker.domain.heathCheck.HealthCheckRepository;
 import lombok.RequiredArgsConstructor;
