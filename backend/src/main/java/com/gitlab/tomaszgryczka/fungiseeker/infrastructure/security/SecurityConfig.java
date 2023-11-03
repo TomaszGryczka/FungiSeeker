@@ -1,5 +1,6 @@
 package com.gitlab.tomaszgryczka.fungiseeker.infrastructure.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
+@Slf4j
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -29,13 +31,20 @@ public class SecurityConfig {
     @Value("${okta.oauth2.issuer}")
     private String issuer;
 
+    @Value("${spring.security.enabled}")
+    private boolean securityEnabled;
+
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorize -> {
-            authorize.requestMatchers("/**").authenticated();
-        });
-        http.cors(Customizer.withDefaults());
-        http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.decoder(jwtDecoder())));
+        log.info(securityEnabled ? "Security enabled" : "Security disabled");
+        if (securityEnabled) {
+            http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/**").authenticated());
+            http.cors(Customizer.withDefaults());
+            http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.decoder(jwtDecoder())));
+        } else {
+            http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/**").permitAll());
+            http.cors(Customizer.withDefaults());
+        }
         return http.build();
     }
 
