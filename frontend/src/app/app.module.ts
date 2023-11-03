@@ -7,7 +7,7 @@ import {MainMenuModule} from "./main-menu/main-menu.module";
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from "@auth0/auth0-angular";
-import {SecureInterceptor} from "./SecureInterceptor";
+import {SecurityInterceptorService} from "./security/security-interceptor.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 @NgModule({
@@ -36,7 +36,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
-    useClass: SecureInterceptor,
+    useClass: SecurityInterceptorService,
     multi: true
   }],
   bootstrap: [AppComponent]

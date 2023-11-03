@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
 import {MainMenuGateway} from "./main-menu-gateway.service";
-import {AuthService} from "@auth0/auth0-angular";
 
 @Component({
   selector: 'main-menu',
@@ -11,8 +10,7 @@ export class MainMenuComponent implements OnInit {
   title = "empty";
   isLoading = true;
 
-  constructor(private mainMenuGateway: MainMenuGateway,
-              private authService: AuthService) {
+  constructor(private mainMenuGateway: MainMenuGateway) {
   }
 
   ngOnInit(): void {
