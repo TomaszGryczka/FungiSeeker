@@ -14,7 +14,6 @@ export class SecureInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.auth.getAccessTokenSilently().pipe(
       mergeMap(token => {
-        console.log(token);
         const tokenReq = req.clone({
           setHeaders: {Authorization: `Bearer ${token}`}
         });
