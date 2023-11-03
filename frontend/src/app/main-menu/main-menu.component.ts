@@ -20,15 +20,5 @@ export class MainMenuComponent implements OnInit {
       this.title = title;
       this.isLoading = false;
     });
-
-    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
-      if(isAuthenticated) {
-        this.authService.getAccessTokenSilently().subscribe((accessToken) => {
-          console.log(accessToken);
-        });
-      } else {
-        console.error("User is not authenticated");
-      }
-    });
   }
 }
