@@ -1,0 +1,15 @@
+img {
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 5% !important;
+}
+
+.start-session-image {
+  background-image: url('https://fungiseekerblobstorage.blob.core.windows.net/icons-auth0/muchomor-czerw.webp');
+  background-size: cover;
+}
+
+.find-place-image {
+  background-image: url('https://fungiseekerblobstorage.blob.core.windows.net/icons-auth0/miejscowka.webp');
+  background-size: cover;
+}

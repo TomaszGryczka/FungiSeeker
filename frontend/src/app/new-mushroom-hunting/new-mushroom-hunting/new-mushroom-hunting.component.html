@@ -1,0 +1,39 @@
+<table class="table-app-container">
+  <tr class="h-100">
+    <td style="vertical-align: top" class="p-0">
+      <app-upper-bar [shouldShowBackButton]="true" [barTitle]="'Nowa sesja grzybobrania'"></app-upper-bar>
+      <div class="row me-0 h-50 text-center">
+        <div class="col-12 pe-0 mt-5" [formGroup]="form">
+          <h2>Uzupełnij dane</h2>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Nazwa grzybobrania</mat-label>
+              <input matInput placeholder="Podaj nazwę..." formControlName="mushroomHuntingName">
+              <mat-icon matSuffix>create</mat-icon>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Krótki opis</mat-label>
+              <textarea matInput placeholder="Podaj opis... (opcjonalny)" formControlName="mushroomHuntingDescription"></textarea>
+              <mat-icon matSuffix>short_text</mat-icon>
+            </mat-form-field>
+          </p>
+          <button mat-raised-button color="primary" (click)="startNewMushroomHunting()"
+          [disabled]="isCreateMushroomHuntingDisabled()">
+            <mat-icon class="material-icons">check_circle</mat-icon>
+            Rozpocznij grzybobranie
+          </button>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: bottom" class="p-0">
+      <app-lower-bar></app-lower-bar>
+    </td>
+  </tr>
+</table>
+
+
+
