@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class AppUserService {
 
     private final AppUserRepository appUserRepository;
+    private final AppUserJdbcRepository appUserJdbcRepository;
 
     @Value("${spring.security.enabled}")
     private boolean securityEnabled;
@@ -30,7 +31,7 @@ public class AppUserService {
     public Long getUserId() {
         if (securityEnabled) {
             final String userAuth0Id = SecurityContextHolder.getContext().getAuthentication().getName();
-            return appUserRepository.findByAuth0Id(userAuth0Id).getId();
+            return appUserJdbcRepository.findByAuth0Id(userAuth0Id).getId();
         } else {
             return 1L;
         }
