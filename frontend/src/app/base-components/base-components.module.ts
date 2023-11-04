@@ -6,6 +6,7 @@ import {LowerBarComponent} from "./lower-bar/lower-bar.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -14,12 +15,13 @@ import {MatIconModule} from "@angular/material/icon";
     UpperBarComponent,
     LowerBarComponent
   ],
-  imports: [
-    CommonModule,
-    MatProgressSpinnerModule,
-    MatToolbarModule,
-    MatIconModule
-  ],
+    imports: [
+        CommonModule,
+        MatProgressSpinnerModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule
+    ],
   exports: [
     LoadingAppComponent,
     UpperBarComponent,

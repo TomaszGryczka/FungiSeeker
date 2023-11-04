@@ -1,4 +1,6 @@
 <mat-toolbar color="primary">
-  <mat-icon *ngIf="shouldShowBackButton" (click)="goBack()" class="me-3">arrow_back</mat-icon>
+  <button *ngIf="shouldShowBackButton" mat-icon-button aria-label="Go Back" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
   <span>{{barTitle}}</span>
 </mat-toolbar>
