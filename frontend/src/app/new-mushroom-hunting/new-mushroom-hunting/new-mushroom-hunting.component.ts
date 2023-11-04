@@ -34,6 +34,7 @@ export class NewMushroomHuntingComponent {
       .subscribe((resp) => {
         if (resp) {
           console.log("Mushroom hunting created: ", resp);
+          this.router.navigate(["/mushroom-hunting"]).then(() => {});
         } else {
           console.error("Could not create mushroom hunting.");
         }
