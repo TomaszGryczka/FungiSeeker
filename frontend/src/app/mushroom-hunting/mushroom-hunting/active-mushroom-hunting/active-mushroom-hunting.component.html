@@ -1,14 +1,15 @@
-<!--<table class="table-app-container">-->
-<!--  <tr class="h-100">-->
-<!--    <td style="vertical-align: top" class="p-0">-->
-<!--      <app-upper-bar [shouldShowBackButton]="true" [barTitle]="'Sesja grzybobrania'"></app-upper-bar>-->
-
-<!--    </td>-->
-<!--  </tr>-->
-<!--  <tr>-->
-<!--    <td style="vertical-align: bottom" class="p-0">-->
-<!--      <app-map></app-map>-->
-<!--      <app-lower-bar></app-lower-bar>-->
-<!--    </td>-->
-<!--  </tr>-->
-<!--</table>-->
+<div class="row g-0">
+  <div class="col-12">
+    <div class="m-2">
+      <h2 class="float-start" >Aktywne grzybobranie</h2>
+      <button class="float-end" mat-raised-button color="primary" (click)="endMushroomHunting()"
+              [disabled]="endingMushroomHunting">
+        <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">check_circle</mat-icon>
+        <mat-icon *ngIf="endingMushroomHunting">
+          <mat-spinner color="primary" diameter="20"></mat-spinner>
+        </mat-icon>
+        Zakończ
+      </button>
+    </div>
+  </div>
+</div>

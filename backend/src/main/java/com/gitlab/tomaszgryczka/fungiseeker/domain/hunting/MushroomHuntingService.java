@@ -40,6 +40,24 @@ public class MushroomHuntingService {
         return mushroomHunting.map(MushroomHuntingDTO::fromMushroomHunting).orElse(null);
     }
 
+    public Long deactivateMushroomHunting() {
+        final Long userId = appUserService.getUserId();
+        final var mushroomHunting =
+                mushroomHuntingRepository.findFirstByUserIdAndMushroomHuntingStatusOrderByStartDateDesc(
+                        userId,
+                        MushroomHuntingStatus.ACTIVE
+                );
+
+        mushroomHunting.ifPresent(mh -> {
+                    mh.setMushroomHuntingStatus(MushroomHuntingStatus.FINISHED);
+                    mushroomHuntingRepository.save(mh);
+                }
+        );
+
+        return mushroomHunting.map(MushroomHunting::getId).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User has no active mushroom hunting"));
+    }
+
     private void validateUserHasNoActiveMushroomHunting() {
         final Long userId = appUserService.getUserId();
         mushroomHuntingRepository.findByUserIdAndMushroomHuntingStatus(userId, MushroomHuntingStatus.ACTIVE)

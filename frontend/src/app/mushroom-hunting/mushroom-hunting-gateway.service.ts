@@ -15,6 +15,10 @@ export class MushroomHuntingGatewayService {
   }
 
   getLastMushroomHunting(): Observable<MushroomHunting> {
-    return this.httpClient.get<MushroomHunting>(this.MUSHROOM_HUNTING_URL + "/active");
+    return this.httpClient.get<MushroomHunting>(`${this.MUSHROOM_HUNTING_URL}/active`);
+  }
+
+  endMushroomHunting(): Observable<number> {
+    return this.httpClient.post<number>(`${this.MUSHROOM_HUNTING_URL}/deactivate`, null);
   }
 }

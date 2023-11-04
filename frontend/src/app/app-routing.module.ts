@@ -8,6 +8,9 @@ import {NewMushroomHuntingComponent} from "./new-mushroom-hunting/new-mushroom-h
 import {
   ActiveMushroomHuntingComponent
 } from "./mushroom-hunting/mushroom-hunting/active-mushroom-hunting/active-mushroom-hunting.component";
+import {
+  FinishedMushroomHuntingComponent
+} from "./mushroom-hunting/finished-mushroom-hunting/finished-mushroom-hunting.component";
 
 const authGuard = environment.shouldAuthenticate ? [AuthGuard] : [];
 
@@ -30,6 +33,11 @@ const routes: Routes = [
   {
     path: 'active-mushroom-hunting',
     component: ActiveMushroomHuntingComponent,
+    canActivate: authGuard
+  },
+  {
+    path: 'finished-mushroom-hunting/:id',
+    component: FinishedMushroomHuntingComponent,
     canActivate: authGuard
   },
   {

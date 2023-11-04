@@ -5,6 +5,7 @@ import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +19,10 @@ public class MushroomHuntingController {
     @GetMapping("/active")
     public MushroomHuntingDTO getActiveMushroomHunting() {
         return mushroomHuntingService.getLastActiveMushroomHunting();
+    }
+
+    @PostMapping("/deactivate")
+    public Long deactivateMushroomHunting() {
+        return mushroomHuntingService.deactivateMushroomHunting();
     }
 }
