@@ -14,7 +14,7 @@ public class AppUserJdbcRepository {
 
     public AppUser findByAuth0Id(String userAuth0Id) {
         return jdbcTemplate.queryForObject(
-                "SELECT * FROM app_user WHERE auth0_id = :auth0Id",
+                "SELECT * FROM app_users WHERE auth0_id = :auth0Id",
                 Collections.singletonMap("auth0Id", userAuth0Id),
                 AppUser.class
         );
