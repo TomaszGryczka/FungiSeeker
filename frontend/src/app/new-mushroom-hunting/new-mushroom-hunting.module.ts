@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {NewMushroomHuntingComponent} from "./new-mushroom-hunting/new-mushroom-hunting.component";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
-import {BaseComponentsModule} from "../base-components/base-components.module";
+import {BaseComponentsModule} from "../shared/base-components.module";
 import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 

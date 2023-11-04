@@ -8,7 +8,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {NgIf} from "@angular/common";
-import {BaseComponentsModule} from "../base-components/base-components.module";
+import {BaseComponentsModule} from "../shared/base-components.module";
 
 @NgModule({
   declarations: [MainMenuComponent],

@@ -9,5 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface MushroomHuntingRepository extends JpaRepository<MushroomHunting, Long> {
-    Optional<MushroomHunting> findByUserIdAndMushroomHuntingStatus(Long userId, MushroomHuntingStatus mushroomHuntingStatus);
+    Optional<MushroomHunting> findByUserIdAndMushroomHuntingStatus(Long userId, MushroomHuntingStatus status);
+    Optional<MushroomHunting> findFirstByUserIdAndMushroomHuntingStatusOrderByStartDateDesc(Long userId, MushroomHuntingStatus status);
 }

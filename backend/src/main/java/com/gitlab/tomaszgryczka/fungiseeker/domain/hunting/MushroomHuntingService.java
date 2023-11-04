@@ -1,6 +1,6 @@
 package com.gitlab.tomaszgryczka.fungiseeker.domain.hunting;
 
-import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingCreationResponse;
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.hunting.MushroomHuntingRepository;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.user.AppUserService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class MushroomHuntingService {
     private final MushroomHuntingRepository mushroomHuntingRepository;
     private final AppUserService appUserService;
 
-    public MushroomHuntingCreationResponse initMushroomHunting(final String name, final String description) {
+    public Long createMushroomHunting(final String name, final String description) {
         validateUserHasNoActiveMushroomHunting();
 
         final var mushroomHunting = MushroomHunting.builder()
@@ -26,18 +26,23 @@ public class MushroomHuntingService {
 
         final var savedMushroomHunting = mushroomHuntingRepository.save(mushroomHunting);
 
-        return MushroomHuntingCreationResponse.builder()
-                .id(savedMushroomHunting.getId())
-                .name(savedMushroomHunting.getName())
-                .description(savedMushroomHunting.getDescription())
-                .startDate(savedMushroomHunting.getStartDate())
-                .status(savedMushroomHunting.getMushroomHuntingStatus())
-                .build();
+        return savedMushroomHunting.getId();
+    }
+
+    public MushroomHuntingDTO getLastActiveMushroomHunting() {
+        final Long userId = appUserService.getUserId();
+        final var mushroomHunting =
+                mushroomHuntingRepository.findFirstByUserIdAndMushroomHuntingStatusOrderByStartDateDesc(
+                        userId,
+                        MushroomHuntingStatus.ACTIVE
+                );
+
+        return mushroomHunting.map(MushroomHuntingDTO::fromMushroomHunting).orElse(null);
     }
 
     private void validateUserHasNoActiveMushroomHunting() {
-        final Long user = appUserService.getUserId();
-        mushroomHuntingRepository.findByUserIdAndMushroomHuntingStatus(user, MushroomHuntingStatus.ACTIVE)
+        final Long userId = appUserService.getUserId();
+        mushroomHuntingRepository.findByUserIdAndMushroomHuntingStatus(userId, MushroomHuntingStatus.ACTIVE)
                 .ifPresent(mushroomHunting -> {
                     throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User has already active mushroom hunting");
                 });

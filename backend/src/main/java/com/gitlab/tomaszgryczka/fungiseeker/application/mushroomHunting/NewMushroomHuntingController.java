@@ -2,7 +2,6 @@ package com.gitlab.tomaszgryczka.fungiseeker.application.mushroomHunting;
 
 
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingCreationRequest;
-import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingCreationResponse;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,7 @@ public class NewMushroomHuntingController {
     private final MushroomHuntingService mushroomHuntingService;
 
     @PostMapping("/create")
-    public MushroomHuntingCreationResponse createNewMushroomHunting(@RequestBody MushroomHuntingCreationRequest request) {
-        return mushroomHuntingService.initMushroomHunting(request.name(), request.description());
+    public Long createNewMushroomHunting(@RequestBody MushroomHuntingCreationRequest request) {
+        return mushroomHuntingService.createMushroomHunting(request.name(), request.description());
     }
 }
