@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.jwt.*;
@@ -45,6 +46,7 @@ public class SecurityConfig {
             http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/**").permitAll());
             http.cors(Customizer.withDefaults());
         }
+        http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 

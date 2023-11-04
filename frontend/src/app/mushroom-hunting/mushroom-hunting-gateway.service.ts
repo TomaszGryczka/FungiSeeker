@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 const zamockowanaSesjaGrzybobrania: MushroomHunting = {
   id: 1,
@@ -35,7 +36,11 @@ const zamockowanaSesjaGrzybobrania: MushroomHunting = {
 })
 export class MushroomHuntingGatewayService {
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
+  }
+
+  startNewMushroomHunting(): Observable<MushroomHunting> {
+
   }
 
   getLastMushroomHunting(): Observable<MushroomHunting> {

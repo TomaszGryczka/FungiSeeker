@@ -4,6 +4,7 @@ import {AuthGuard} from "@auth0/auth0-angular";
 import {MainMenuComponent} from "./main-menu/main-menu.component";
 import {environment} from "../environments/environment";
 import {MushroomHuntingComponent} from "./mushroom-hunting/mushroom-hunting/mushroom-hunting.component";
+import {NewMushroomHuntingComponent} from "./new-mushroom-hunting/new-mushroom-hunting/new-mushroom-hunting.component";
 
 const authGuard = environment.shouldAuthenticate ? [AuthGuard] : [];
 
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'mushroom-hunting',
     component: MushroomHuntingComponent,
+    canActivate: authGuard
+  },
+  {
+    path: 'new-mushroom-hunting',
+    component: NewMushroomHuntingComponent,
     canActivate: authGuard
   },
   {
