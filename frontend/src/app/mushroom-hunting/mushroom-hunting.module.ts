@@ -4,6 +4,10 @@ import {MushroomHuntingComponent} from './mushroom-hunting/mushroom-hunting.comp
 import {BaseComponentsModule} from "../base-components/base-components.module";
 import { NewMushroomHuntingComponent } from './new-mushroom-hunting/new-mushroom-hunting.component';
 import { MapComponent } from './map/map.component';
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -14,7 +18,11 @@ import { MapComponent } from './map/map.component';
   ],
   imports: [
     CommonModule,
-    BaseComponentsModule
+    BaseComponentsModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MushroomHuntingModule {

@@ -1,13 +1,21 @@
 <ng-container *ngIf="isLoading">
   <app-loading-app></app-loading-app>
 </ng-container>
-<ng-container *ngIf="!isLoading">
-  <app-upper-bar [shouldShowBackButton]=false [barTitle]="title"></app-upper-bar>
-  <div *ngIf="loadingLastMushroomHunting">
-    <mat-spinner diameter="70"></mat-spinner>
-  </div>
-  <div *ngIf="!loadingLastMushroomHunting">
-    {{loadedLastMushroomHunting}}
-  </div>
-  <app-lower-bar></app-lower-bar>
-</ng-container>
+<table *ngIf="!isLoading" class="table-app-container">
+  <tr class="h-100">
+    <td style="vertical-align: top" class="p-0">
+      <app-upper-bar [shouldShowBackButton]=false [barTitle]="title"></app-upper-bar>
+      <div *ngIf="loadingLastMushroomHunting">
+        <mat-spinner diameter="70"></mat-spinner>
+      </div>
+      <div *ngIf="!loadingLastMushroomHunting">
+        {{loadedLastMushroomHunting}}
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: bottom" class="p-0">
+      <app-lower-bar></app-lower-bar>
+    </td>
+  </tr>
+</table>

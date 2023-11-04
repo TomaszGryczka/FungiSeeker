@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {MainMenuGateway} from "./main-menu-gateway.service";
-import {AuthService} from "@auth0/auth0-angular";
+import {AuthProviderService} from "../security/auth-provider.service";
 
 @Component({
   selector: 'main-menu',
@@ -16,7 +16,7 @@ export class MainMenuComponent implements OnInit {
   loadedLastMushroomHunting = "";
 
   constructor(private mainMenuGateway: MainMenuGateway,
-              private auth: AuthService) {
+              private auth: AuthProviderService) {
   }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class MainMenuComponent implements OnInit {
   }
 
   private initTitle(): void {
-    this.auth.user$.subscribe((user) => {
+    this.auth.user().subscribe((user) => {
       this.title = "Witaj, " + user?.name + "!";
       this.isLoading = false;
     });
