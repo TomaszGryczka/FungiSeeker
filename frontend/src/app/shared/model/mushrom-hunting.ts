@@ -10,6 +10,6 @@ export interface MushroomHunting {
   endDate?: string;
   coordinates: Coordinates;
   userId: number;
-  stats: MushroomHuntingStatus;
+  status: MushroomHuntingStatus;
   mushrooms: Mushroom[];
 }

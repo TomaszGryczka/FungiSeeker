@@ -1,9 +1,10 @@
-<table *ngIf="!isLoading" class="table-app-container">
+<table class="table-app-container">
   <tr class="h-100">
     <td style="vertical-align: top" class="p-0">
       <app-upper-bar [shouldShowBackButton]="true" [barTitle]="'Sesja grzybobrania'"></app-upper-bar>
       <app-loading-app *ngIf="isLoading"></app-loading-app>
-      <app-active-mushroom-hunting *ngIf="shouldShowActiveMushroomHunting()"></app-active-mushroom-hunting>
+      <app-active-mushroom-hunting *ngIf="shouldShowActiveMushroomHunting()"
+                                   [mushroomHunting]="mushroomHunting"></app-active-mushroom-hunting>
       <app-none-mushroom-hunting *ngIf="shouldShowNoneMushroomHunting()"></app-none-mushroom-hunting>
     </td>
   </tr>

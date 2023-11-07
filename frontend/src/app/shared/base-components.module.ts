@@ -7,25 +7,32 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import { MushroomsListComponent } from './mushrooms-list/mushrooms-list.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
   declarations: [
     LoadingAppComponent,
     UpperBarComponent,
-    LowerBarComponent
+    LowerBarComponent,
+    MushroomsListComponent
   ],
-    imports: [
-        CommonModule,
-        MatProgressSpinnerModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule
-    ],
+  imports: [
+    CommonModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTableModule,
+    MatCardModule
+  ],
   exports: [
     LoadingAppComponent,
     UpperBarComponent,
-    LowerBarComponent
+    LowerBarComponent,
+    MushroomsListComponent
   ]
 })
 export class BaseComponentsModule {
