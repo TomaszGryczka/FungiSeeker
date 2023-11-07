@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Service
 public class MushroomHuntingService {
@@ -50,6 +52,7 @@ public class MushroomHuntingService {
 
         mushroomHunting.ifPresent(mh -> {
                     mh.setMushroomHuntingStatus(MushroomHuntingStatus.FINISHED);
+                    mh.setEndDate(LocalDateTime.now());
                     mushroomHuntingRepository.save(mh);
                 }
         );

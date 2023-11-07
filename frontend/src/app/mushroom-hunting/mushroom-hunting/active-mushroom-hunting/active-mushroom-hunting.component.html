@@ -1,15 +1,33 @@
 <div class="row g-0">
   <div class="col-12">
     <div class="m-2">
-      <h2 class="float-start" >Aktywne grzybobranie</h2>
-      <button class="float-end" mat-raised-button color="primary" (click)="endMushroomHunting()"
-              [disabled]="endingMushroomHunting">
-        <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">check_circle</mat-icon>
-        <mat-icon *ngIf="endingMushroomHunting">
-          <mat-spinner color="primary" diameter="20"></mat-spinner>
-        </mat-icon>
-        Zakończ
-      </button>
+      <div class="text-center">
+        <h2>
+          Status grzybobrania:
+          <span class="badge bg-success">AKTWYNY</span>
+        </h2>
+      </div>
+      <div class="text-center">
+        <button mat-raised-button color="primary" (click)="makeMushroomPhoto()"
+                [disabled]="makingMushroomPhoto">
+          <mat-icon *ngIf="!makingMushroomPhoto" class="material-icons">photo_camera</mat-icon>
+          <mat-icon *ngIf="makingMushroomPhoto">
+            <mat-spinner color="primary" diameter="20"></mat-spinner>
+          </mat-icon>
+          Zrób zdjęcie
+        </button>
+        <button class="ms-2" mat-raised-button color="warn" (click)="endMushroomHunting()"
+                [disabled]="endingMushroomHunting">
+          <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">check_circle</mat-icon>
+          <mat-icon *ngIf="endingMushroomHunting">
+            <mat-spinner color="primary" diameter="20"></mat-spinner>
+          </mat-icon>
+          Zakończ
+        </button>
+      </div>
+      <div class="mt-3">
+        <app-mushrooms-list></app-mushrooms-list>
+      </div>
     </div>
   </div>
 </div>

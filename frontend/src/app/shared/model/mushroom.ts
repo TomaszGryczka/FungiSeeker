@@ -6,4 +6,5 @@ export interface Mushroom {
   mushroomHuntingId: number;
   latitude: number;
   longitude: number;
+  isEdible: boolean;
 }
