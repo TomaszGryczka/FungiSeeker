@@ -12,6 +12,8 @@ import { NoneMushroomHuntingComponent } from './mushroom-hunting/none-mushroom-h
 import {MatInputModule} from "@angular/material/input";
 import { ActiveMushroomHuntingComponent } from './mushroom-hunting/active-mushroom-hunting/active-mushroom-hunting.component';
 import { FinishedMushroomHuntingComponent } from './finished-mushroom-hunting/finished-mushroom-hunting.component';
+import { CameraComponent } from './mushroom-hunting/active-mushroom-hunting/camera/camera.component';
+import {WebcamModule} from "ngx-webcam";
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { FinishedMushroomHuntingComponent } from './finished-mushroom-hunting/fi
     MapComponent,
     NoneMushroomHuntingComponent,
     ActiveMushroomHuntingComponent,
-    FinishedMushroomHuntingComponent
+    FinishedMushroomHuntingComponent,
+    CameraComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import { FinishedMushroomHuntingComponent } from './finished-mushroom-hunting/fi
     MatIconModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    WebcamModule
   ]
 })
 export class MushroomHuntingModule {
