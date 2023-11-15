@@ -8,7 +8,6 @@
         </h2>
       </div>
       <div class="text-center">
-        <app-camera></app-camera>
         <input type="file" accept="image/*" capture="environment" #uploader hidden>
         <button mat-raised-button color="primary" (click)="uploader.click()"
                 [disabled]="makingMushroomPhoto">

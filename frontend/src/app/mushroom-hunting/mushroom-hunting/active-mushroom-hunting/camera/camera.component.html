@@ -1,9 +1,0 @@
-<webcam class=""  *ngIf="!isLoading" [width]="width" [height]="height"
-        [trigger]="invokeObservable"
-        (imageCapture)="captureImg($event)"
-></webcam>
-<div class="col-12">
-  <button class="btn btn-danger" (click)="getSnapshot()">
-    Capture Image
-  </button>
-</div>
