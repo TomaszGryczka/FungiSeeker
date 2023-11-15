@@ -9,5 +9,4 @@ public class FungiseekerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FungiseekerApplication.class, args);
 	}
-
 }

@@ -8,11 +8,11 @@
         </h2>
       </div>
       <div class="text-center">
-        <input type="file" accept="image/*" capture="environment" #uploader hidden>
+        <input type="file" accept="image/*" capture="environment" (change)="processMushroomPhoto($event)" #uploader hidden>
         <button mat-raised-button color="primary" (click)="uploader.click()"
-                [disabled]="makingMushroomPhoto">
-          <mat-icon *ngIf="!makingMushroomPhoto" class="material-icons">photo_camera</mat-icon>
-          <mat-icon *ngIf="makingMushroomPhoto">
+                [disabled]="processingMushroomPhoto">
+          <mat-icon *ngIf="!processingMushroomPhoto" class="material-icons">photo_camera</mat-icon>
+          <mat-icon *ngIf="processingMushroomPhoto">
             <mat-spinner color="primary" diameter="20"></mat-spinner>
           </mat-icon>
           Zrób zdjęcie
