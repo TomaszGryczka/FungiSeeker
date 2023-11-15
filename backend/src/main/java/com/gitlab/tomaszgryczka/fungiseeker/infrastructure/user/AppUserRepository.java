@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     boolean existsByAuth0Id(String userAuth0Id);
-    AppUser findByAuth0Id(String userAuth0Id);
 }

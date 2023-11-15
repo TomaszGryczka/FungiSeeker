@@ -2,12 +2,15 @@ package com.gitlab.tomaszgryczka.fungiseeker.application.mushroomHunting;
 
 
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingDTO;
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomPredictionDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingService;
+import com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom.MushroomPrediction;
+import com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom.MushroomService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/mushroom-hunting")
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MushroomHuntingController {
 
     private final MushroomHuntingService mushroomHuntingService;
+    private final MushroomService mushroomService;
 
     @GetMapping("/active")
     public MushroomHuntingDTO getActiveMushroomHunting() {
@@ -24,5 +28,10 @@ public class MushroomHuntingController {
     @PostMapping("/deactivate")
     public Long deactivateMushroomHunting() {
         return mushroomHuntingService.deactivateMushroomHunting();
+    }
+
+    @PostMapping("/addMushroom")
+    public MushroomPredictionDTO addMushroomToHunting(@RequestParam("file") MultipartFile file) {
+        return mushroomService.addMushroomAndRetrieveMushroomSpeciesList(file);
     }
 }

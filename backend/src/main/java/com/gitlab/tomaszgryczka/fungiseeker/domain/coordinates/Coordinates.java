@@ -10,6 +10,6 @@ import lombok.*;
 @Builder
 @Embeddable
 public class Coordinates {
-    private Double latitude;
-    private Double longitude;
+    private String latitude;
+    private String longitude;
 }

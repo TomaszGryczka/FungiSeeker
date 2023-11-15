@@ -21,13 +21,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>6.0.13</version>
         </dependency>
-
         <!-- ORM -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -38,8 +36,6 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-
         <!-- security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,7 +47,6 @@
             <artifactId>okta-spring-boot-starter</artifactId>
             <version>3.0.5</version>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -61,6 +56,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-storage-blob</artifactId>
+            <version>12.24.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.drewnoakes</groupId>
+            <artifactId>metadata-extractor</artifactId>
+            <version>2.18.0</version>
         </dependency>
     </dependencies>
     <build>
