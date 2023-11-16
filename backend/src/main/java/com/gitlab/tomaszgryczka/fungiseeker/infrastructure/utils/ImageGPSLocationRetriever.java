@@ -1,6 +1,7 @@
 package com.gitlab.tomaszgryczka.fungiseeker.infrastructure.utils;
 
 import com.drew.imaging.ImageMetadataReader;
+import com.drew.lang.GeoLocation;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.GpsDirectory;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.coordinates.Coordinates;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Slf4j
 @UtilityClass
@@ -21,8 +23,14 @@ public class ImageGPSLocationRetriever {
 
             if (!gpsDirectories.isEmpty()) {
                 final GpsDirectory gpsDirectory = gpsDirectories.iterator().next();
-                final String longitude = String.valueOf(gpsDirectory.getGeoLocation().getLongitude());
-                final String latitude = String.valueOf(gpsDirectory.getGeoLocation().getLatitude());
+                final String longitude = Optional.ofNullable(gpsDirectory.getGeoLocation())
+                        .map(GeoLocation::getLongitude)
+                        .map(String::valueOf)
+                        .orElse(null);
+                final String latitude = Optional.ofNullable(gpsDirectory.getGeoLocation())
+                        .map(GeoLocation::getLatitude)
+                        .map(String::valueOf)
+                        .orElse(null);
 
                 return Coordinates.builder()
                         .longitude(longitude)
