@@ -33,7 +33,7 @@ public class ImageGPSLocationRetriever {
                 return Coordinates.builder().build();
             }
         } catch (Exception ex) {
-            throw new ImageSavingException("Error while processing image metadata");
+            throw new ImageSavingException("Error while processing image metadata", ex);
         }
     }
 }

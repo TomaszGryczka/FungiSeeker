@@ -4,4 +4,8 @@ public class ImageSavingException extends Exception {
     public ImageSavingException(String message) {
         super(message);
     }
+
+    public ImageSavingException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
