@@ -1,5 +1,5 @@
 import {AfterViewInit, Component} from '@angular/core';
-import {LayerGroup, Map, map, tileLayer} from 'leaflet';
+import {FeatureGroup, Map, map, tileLayer} from 'leaflet';
 import {MushroomStoreService} from "../../shared/mushroom-map-store/mushroom-store.service";
 import {MarkerService} from "./marker.service";
 
@@ -11,7 +11,7 @@ import {MarkerService} from "./marker.service";
 export class MapComponent implements AfterViewInit {
 
   private map?: Map;
-  private markers?: LayerGroup;
+  private markers?: FeatureGroup;
 
   constructor(private markerService: MarkerService,
               private mushroomStoreService: MushroomStoreService) {
@@ -28,7 +28,7 @@ export class MapComponent implements AfterViewInit {
       zoom: 13
     });
 
-    this.markers = new LayerGroup().addTo(this.map);
+    this.markers = new FeatureGroup().addTo(this.map);
 
     const tiles = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
@@ -41,6 +41,9 @@ export class MapComponent implements AfterViewInit {
     this.mushroomStoreService.getMushrooms().subscribe(mushrooms => {
       if (mushrooms) {
         this.markerService.markMushroomsOnMap(mushrooms, this.markers);
+        if (this.markers) {
+          this.map?.fitBounds(this.markers.getBounds());
+        }
       }
     });
   }
