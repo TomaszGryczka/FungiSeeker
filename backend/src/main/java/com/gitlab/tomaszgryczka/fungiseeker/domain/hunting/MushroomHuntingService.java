@@ -31,7 +31,7 @@ public class MushroomHuntingService {
         return savedMushroomHunting.getId();
     }
 
-    public MushroomHuntingDTO getLastActiveMushroomHunting() {
+    public MushroomHuntingDTO getLastActiveMushroomHuntingDto() {
         final Long userId = appUserService.getUserId();
         final var mushroomHunting =
                 mushroomHuntingRepository.findFirstByUserIdAndMushroomHuntingStatusOrderByStartDateDesc(
@@ -40,6 +40,16 @@ public class MushroomHuntingService {
                 );
 
         return mushroomHunting.map(MushroomHuntingDTO::fromMushroomHunting).orElse(null);
+    }
+
+    public MushroomHunting getLastActiveMushroomHunting() {
+        final Long userId = appUserService.getUserId();
+
+        return mushroomHuntingRepository.findFirstByUserIdAndMushroomHuntingStatusOrderByStartDateDesc(
+                        userId,
+                        MushroomHuntingStatus.ACTIVE
+                )
+                .orElse(null);
     }
 
     public Long deactivateMushroomHunting() {

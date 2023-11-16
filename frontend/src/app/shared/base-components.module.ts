@@ -30,12 +30,13 @@ import { MushroomPredictionsComponent } from './mushroom-predictions/mushroom-pr
     MatTableModule,
     MatCardModule
   ],
-  exports: [
-    LoadingAppComponent,
-    UpperBarComponent,
-    LowerBarComponent,
-    MushroomsListComponent
-  ]
+    exports: [
+        LoadingAppComponent,
+        UpperBarComponent,
+        LowerBarComponent,
+        MushroomsListComponent,
+        MushroomPredictionsComponent
+    ]
 })
 export class BaseComponentsModule {
 }

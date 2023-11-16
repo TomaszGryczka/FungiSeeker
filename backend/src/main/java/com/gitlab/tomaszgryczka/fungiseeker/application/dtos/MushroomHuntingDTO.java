@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 
 public record MushroomHuntingDTO(
         @NotNull Long id,
@@ -16,7 +18,8 @@ public record MushroomHuntingDTO(
         LocalDateTime endDate,
         Coordinates coordinates,
         @NotNull Long userId,
-        @NotNull MushroomHuntingStatus status
+        @NotNull MushroomHuntingStatus status,
+        List<MushroomDTO> mushrooms
 ) {
     public static MushroomHuntingDTO fromMushroomHunting(final MushroomHunting mushroomHunting) {
         return new MushroomHuntingDTO(
@@ -27,7 +30,11 @@ public record MushroomHuntingDTO(
                 mushroomHunting.getEndDate(),
                 mushroomHunting.getCoordinates(),
                 mushroomHunting.getUserId(),
-                mushroomHunting.getMushroomHuntingStatus()
+                mushroomHunting.getMushroomHuntingStatus(),
+                mushroomHunting.getMushrooms().stream()
+                        .map(MushroomDTO::fromMushroom)
+                        .filter(Objects::nonNull)
+                        .toList()
         );
     }
 }

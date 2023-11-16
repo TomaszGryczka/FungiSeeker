@@ -27,7 +27,17 @@
         </button>
       </div>
       <div class="mt-3">
-        <app-mushrooms-list></app-mushrooms-list>
+        <mat-icon *ngIf="savingMushroomInfo">
+          <mat-spinner color="primary" diameter="20"></mat-spinner>
+        </mat-icon>
+        <ng-container *ngIf="!savingMushroomInfo">
+          <app-mushrooms-list *ngIf="!mushroomPredictions" [mushrooms]="mushroomHunting?.mushrooms"></app-mushrooms-list>
+          <app-mushroom-predictions
+            *ngIf="mushroomPredictions"
+            [mushroomPrediction]="mushroomPredictions"
+            (mushroomSelected)="onMushroomSelected($event)"
+          ></app-mushroom-predictions>
+        </ng-container>
       </div>
     </div>
   </div>
