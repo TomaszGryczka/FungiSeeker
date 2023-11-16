@@ -8,7 +8,7 @@
         </h2>
       </div>
       <div class="text-center">
-        <input type="file" accept="image/*" capture="environment" (change)="processMushroomPhoto($event)" #uploader hidden>
+        <input type="file" accept="image/*" (change)="processMushroomPhoto($event)" #uploader hidden>
         <button mat-raised-button color="primary" (click)="uploader.click()"
                 [disabled]="processingMushroomPhoto">
           <mat-icon *ngIf="!processingMushroomPhoto" class="material-icons">photo_camera</mat-icon>
