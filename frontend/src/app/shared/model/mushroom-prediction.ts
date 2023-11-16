@@ -1,5 +1,7 @@
 export interface MushroomPrediction {
-  id: number;
+  mushroomPredictionId: number;
   name: string;
   probability: number;
+  imageUrl: string;
+  isEdible: boolean;
 }

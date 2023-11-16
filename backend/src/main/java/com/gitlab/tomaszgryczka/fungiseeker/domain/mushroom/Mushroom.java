@@ -1,6 +1,8 @@
 package com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.coordinates.Coordinates;
+import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHunting;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -9,7 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "mushroom")
@@ -25,7 +27,11 @@ public class Mushroom {
     private Boolean isEdible;
     private String imageUrl;
 
-    private Long mushroomHuntingId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "mushroom_hunting_id")
+    @JsonBackReference
+    private MushroomHunting mushroomHunting;
+
     private Long userId;
 
     @Embedded

@@ -4,7 +4,7 @@ import {MushroomHuntingGatewayService} from "../../mushroom-hunting-gateway.serv
 import {finalize} from "rxjs";
 import {MushroomHunting} from "../../../shared/model/mushrom-hunting";
 import {MushroomPrediction} from "../../../shared/model/mushroom-prediction";
-import {MushroomPredictionDto} from "../../../shared/model/mushroom-prediction-dto";
+import {MushroomHuntingPrediction} from "../../../shared/model/mushroom-hunting-prediction";
 
 @Component({
   selector: 'app-active-mushroom-hunting',
@@ -16,10 +16,11 @@ export class ActiveMushroomHuntingComponent {
   @Input()
   mushroomHunting?: MushroomHunting;
 
-  mushroomPredictions?: MushroomPredictionDto;
+  mushroomPredictions?: MushroomHuntingPrediction;
 
   endingMushroomHunting = false;
   processingMushroomPhoto = false;
+  savingMushroomInfo = false;
 
   constructor(private router: Router,
               private mushroomHuntingGatewayService: MushroomHuntingGatewayService) {
@@ -50,6 +51,18 @@ export class ActiveMushroomHuntingComponent {
           }
         });
     }
+  }
+
+  onMushroomSelected(prediction: MushroomHuntingPrediction) {
+    this.savingMushroomInfo = true;
+    this.mushroomHuntingGatewayService.updateMushroomInfoWithSelectedPrediction(prediction)
+      .pipe(finalize(() => {
+        this.mushroomPredictions = undefined;
+        this.savingMushroomInfo = false;
+      }))
+      .subscribe(resp => {
+        this.mushroomHunting?.mushrooms.push(resp);
+      });
   }
 
 }

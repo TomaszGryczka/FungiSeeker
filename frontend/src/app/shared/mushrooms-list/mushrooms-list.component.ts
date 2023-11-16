@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Mushroom} from "../model/mushroom";
+import {MushroomPrediction} from "../model/mushroom-prediction";
 
 @Component({
   selector: 'app-mushrooms-list',
@@ -9,30 +10,27 @@ import {Mushroom} from "../model/mushroom";
 export class MushroomsListComponent {
 
   @Input()
-  mushrooms: Mushroom[] = [
-    {
-      id: 1,
-      name: "Pieczarka",
-      description: "Pieczarka leśna",
-      imageUrl: "https://fungiseekerblobstorage.blob.core.windows.net/icons-auth0/muchomor-czerw.webp",
-      mushroomHuntingId: 1,
-      latitude: 51.109,
-      longitude: 17.032,
-      isEdible: true
-    },
-    {
-      id: 2,
-      name: "Kania",
-      description: "Kania leśna",
-      imageUrl: "https://fungiseekerblobstorage.blob.core.windows.net/icons-auth0/miejscowka.webp",
-      mushroomHuntingId: 1,
-      latitude: 51.109,
-      longitude: 17.032,
-      isEdible: false
-    }
-  ];
+  mushrooms?: Mushroom[] = [];
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
+  shouldShowMore = false;
+
   constructor() {
+  }
+
+  getMushroomsList(): Mushroom[] {
+    return this.mushrooms ? this.mushrooms : [];
+  }
+
+  getFirstTwoIfShouldNotShowMore(): Mushroom[] {
+    return this.shouldShowMore ?  this.getMushroomsList() : this.getMushroomsList().slice(0, 2);
+  }
+
+  toggleShowMore() {
+    this.shouldShowMore = !this.shouldShowMore;
+  }
+
+  showMoreButtonLabel(): string {
+    return this.shouldShowMore ? "Pokaż mniej" : "Pokaż więcej";
   }
 }

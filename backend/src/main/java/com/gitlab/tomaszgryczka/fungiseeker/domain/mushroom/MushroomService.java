@@ -29,7 +29,7 @@ public class MushroomService {
     public MushroomPredictionDTO addMushroomAndRetrieveMushroomSpeciesList(final MultipartFile file) {
         final var mushroomBuilder = Mushroom.builder();
         mushroomBuilder.userId(appUserService.getUserId());
-        mushroomBuilder.mushroomHuntingId(mushroomHuntingService.getLastActiveMushroomHunting().id());
+        mushroomBuilder.mushroomHunting(mushroomHuntingService.getLastActiveMushroomHunting());
 
         try {
             final String imageUrl = azureStorageAccountGateway.saveImageInBlobStorage(file);
@@ -50,5 +50,20 @@ public class MushroomService {
                 .mushroomId(newMushroom.getId())
                 .mushroomPredictions(Collections.emptyList())
                 .build();
+    }
+
+    public Mushroom updateMushroomInfo(final MushroomPredictionDTO prediction) {
+        final var mushroom = mushroomRepository.findById(prediction.mushroomId())
+                .orElseThrow(() -> new RuntimeException("Mushroom with id " + prediction.mushroomId() + " not found"));
+
+        final var selectedPrediction = prediction.mushroomPredictions().stream().findFirst();
+
+        return mushroomRepository.save(
+                mushroom.toBuilder()
+                        .name(selectedPrediction.map(MushroomPrediction::name).orElse(null))
+                        .isEdible(selectedPrediction.map(MushroomPrediction::isEdible).orElse(null))
+                        .description(selectedPrediction.map(MushroomPrediction::description).orElse(null))
+                        .build()
+        );
     }
 }

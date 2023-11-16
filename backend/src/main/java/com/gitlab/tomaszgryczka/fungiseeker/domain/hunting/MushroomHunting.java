@@ -1,6 +1,8 @@
 package com.gitlab.tomaszgryczka.fungiseeker.domain.hunting;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.coordinates.Coordinates;
+import com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom.Mushroom;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -8,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -40,4 +43,8 @@ public class MushroomHunting {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private MushroomHuntingStatus mushroomHuntingStatus;
+
+    @OneToMany(mappedBy = "mushroomHunting", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Mushroom> mushrooms;
 }

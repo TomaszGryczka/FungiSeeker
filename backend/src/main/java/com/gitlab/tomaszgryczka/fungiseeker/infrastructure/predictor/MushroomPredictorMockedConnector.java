@@ -20,14 +20,20 @@ public class MushroomPredictorMockedConnector implements MushroomPredictorConnec
     public List<MushroomPrediction> getMushroomPredictionListFromImage(String blobStorageUrl) {
         return Arrays.asList(
                 MushroomPrediction.builder()
-                        .mushroomHuntingId(mushroomHuntingService.getLastActiveMushroomHunting().id())
+                        .mushroomPredictionId(1L)
+                        .mushroomHuntingId(mushroomHuntingService.getLastActiveMushroomHuntingDto().id())
                         .name("Borowik szlachetny")
                         .probability(0.91)
+                        .imageUrl("https://fungiseekerblobstorage.blob.core.windows.net/images/13bb7c99-fdb3-4a26-b270-eccd7ecf999dsignal-2023-11-15-232525_002.jpg")
+                        .isEdible(true)
                         .build(),
                 MushroomPrediction.builder()
-                        .mushroomHuntingId(mushroomHuntingService.getLastActiveMushroomHunting().id())
+                        .mushroomPredictionId(3L)
+                        .mushroomHuntingId(mushroomHuntingService.getLastActiveMushroomHuntingDto().id())
                         .name("Muchomorek czerwony")
                         .probability(0.05)
+                        .imageUrl("https://fungiseekerblobstorage.blob.core.windows.net/images/13bb7c99-fdb3-4a26-b270-eccd7ecf999dsignal-2023-11-15-232525_002.jpg")
+                        .isEdible(false)
                         .build()
         );
     }

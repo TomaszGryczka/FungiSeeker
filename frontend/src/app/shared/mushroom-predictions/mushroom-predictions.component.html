@@ -1,1 +1,35 @@
-<p>mushroom-predictions works!</p>
+<div>
+  <h3>
+    Wybierz grzyba z poniższej listy:
+  </h3>
+  <table mat-table [dataSource]="mushroomPredictions()" class="mat-elevation-z8">
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>Zdjęcie</th>
+      <td mat-cell *matCellDef="let prediction">
+        <img class="img-fluid p-2" [src]="prediction.imageUrl" alt="mushroom">
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+      <td mat-cell *matCellDef="let prediction"> {{prediction.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> % </th>
+      <td mat-cell *matCellDef="let prediction"> {{prediction.probability*100}}%</td>
+    </ng-container>
+
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Jadalny </th>
+      <td mat-cell *matCellDef="let prediction">
+        <mat-icon *ngIf="prediction.isEdible" color="primary">check</mat-icon>
+        <mat-icon *ngIf="!prediction.isEdible" color="warn">close</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="chooseMushroom(row)"></tr>
+  </table>
+</div>
+
