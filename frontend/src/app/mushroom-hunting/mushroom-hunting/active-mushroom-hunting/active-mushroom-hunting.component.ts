@@ -4,7 +4,7 @@ import {MushroomHuntingGatewayService} from "../../mushroom-hunting-gateway.serv
 import {finalize} from "rxjs";
 import {MushroomHunting} from "../../../shared/model/mushrom-hunting";
 import {MushroomHuntingPrediction} from "../../../shared/model/mushroom-hunting-prediction";
-import {MushroomMapStoreService} from "../../../shared/mushroom-map-store/mushroom-map-store.service";
+import {MushroomStoreService} from "../../../shared/mushroom-map-store/mushroom-store.service";
 
 @Component({
   selector: 'app-active-mushroom-hunting',
@@ -24,7 +24,7 @@ export class ActiveMushroomHuntingComponent implements OnInit {
 
   constructor(private router: Router,
               private mushroomHuntingGatewayService: MushroomHuntingGatewayService,
-              private mushroomStore: MushroomMapStoreService) {
+              private mushroomStore: MushroomStoreService) {
   }
 
   ngOnInit(): void {

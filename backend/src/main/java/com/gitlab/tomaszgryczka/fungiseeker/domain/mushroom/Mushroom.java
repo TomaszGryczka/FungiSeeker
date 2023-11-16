@@ -1,6 +1,7 @@
 package com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.coordinates.Coordinates;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHunting;
 import jakarta.persistence.*;
@@ -35,5 +36,6 @@ public class Mushroom {
     private Long userId;
 
     @Embedded
+    @JsonUnwrapped
     private Coordinates coordinates;
 }

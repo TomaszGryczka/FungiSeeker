@@ -6,22 +6,14 @@ import {Map} from "leaflet";
 @Injectable({
   providedIn: 'root'
 })
-export class MushroomMapStoreService {
+export class MushroomStoreService {
 
   mushroomStore$= new BehaviorSubject<Mushroom[]>([]);
-  mapStore$ = new BehaviorSubject<Map | null>(null);
 
   constructor() { }
 
-  public setMap(map: Map) {
-    this.mapStore$.next(map);
-  }
-
-  public getMap(): Observable<Map | null> {
-    return this.mapStore$.asObservable();
-  }
-
   public setMushrooms(mushrooms: Mushroom[]) {
+    console.log(mushrooms);
     this.mushroomStore$.next(mushrooms);
   }
 

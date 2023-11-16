@@ -1,33 +1,28 @@
 import {Injectable} from '@angular/core';
-import {Icon, Marker, MarkerOptions} from 'leaflet';
-import {MushroomMapStoreService} from "../../shared/mushroom-map-store/mushroom-map-store.service";
+import {Icon, LayerGroup, Marker, MarkerOptions} from 'leaflet';
+import {Mushroom} from "../../shared/model/mushroom";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MarkerService {
 
-  constructor(private mushroomStore: MushroomMapStoreService) {
+  constructor() {
   }
 
-  markMushroomsOnMap() {
-    this.mushroomStore.getMushrooms().subscribe(mushrooms => {
+  markMushroomsOnMap(mushrooms: Mushroom[], markers?: LayerGroup): void {
+    if (markers) {
       const icon = new Icon.Default();
       icon.options.shadowSize = [0, 0];
-      this.mushroomStore.getMap().subscribe(mapInstance => {
-        if (mapInstance) {
-          mushrooms.forEach(mushroom => {
-            if (mushroom.latitude && mushroom.longitude) {
-              const newMarker = new Marker([mushroom.latitude, mushroom.longitude], {
-                icon: icon
-              } as MarkerOptions);
-              console.log(newMarker)
-              newMarker.addTo(mapInstance);
-            }
-          });
-          mapInstance.invalidateSize();
+
+      mushrooms.forEach(mushroom => {
+        if (mushroom.latitude && mushroom.longitude) {
+          const newMarker = new Marker([mushroom.latitude, mushroom.longitude], {
+            icon: icon
+          } as MarkerOptions);
+          newMarker.addTo(markers);
         }
       });
-    });
+    }
   }
 }
