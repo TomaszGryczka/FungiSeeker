@@ -26,11 +26,19 @@ export class MushroomsListComponent {
     return this.shouldShowMore ?  this.getMushroomsList() : this.getMushroomsList().slice(0, 2);
   }
 
+  shouldShowShowMoreButton(): boolean {
+    return this.getMushroomsList().length > 2;
+  }
+
   toggleShowMore() {
     this.shouldShowMore = !this.shouldShowMore;
   }
 
   showMoreButtonLabel(): string {
     return this.shouldShowMore ? "Pokaż mniej" : "Pokaż więcej";
+  }
+
+  showMoreButtonIcon(): string {
+    return this.shouldShowMore ? "expand_less" : "expand_more";
   }
 }

@@ -1,35 +1,40 @@
 <div class="text-center">
-  <table mat-table [dataSource]="getFirstTwoIfShouldNotShowMore()" class="mat-elevation-z8">
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef>Zdjęcie</th>
-      <td mat-cell *matCellDef="let mushroom">
-        <img class="img-fluid p-2" [src]="mushroom.imageUrl" alt="mushroom">
-      </td>
-    </ng-container>
+  <div *ngIf="getMushroomsList().length === 0">
+    <h3>Nie znalazłeś jeszcze żadnych grzybów!</h3>
+  </div>
+  <div *ngIf="getMushroomsList().length !== 0">
+    <table mat-table [dataSource]="getFirstTwoIfShouldNotShowMore()" class="mat-elevation-z8">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>Zdjęcie</th>
+        <td mat-cell *matCellDef="let mushroom">
+          <img class="img-fluid p-2" [src]="mushroom.imageUrl" alt="mushroom">
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nazwa</th>
-      <td mat-cell *matCellDef="let mushroom"> {{mushroom.name}} </td>
-    </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nazwa</th>
+        <td mat-cell *matCellDef="let mushroom"> {{mushroom.name}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef> Opis</th>
-      <td mat-cell *matCellDef="let mushroom"> {{mushroom.description}} </td>
-    </ng-container>
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> Opis</th>
+        <td mat-cell *matCellDef="let mushroom"> {{mushroom.description}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef> Jadalny</th>
-      <td mat-cell *matCellDef="let mushroom">
-        <mat-icon *ngIf="mushroom.isEdible" color="primary">check</mat-icon>
-        <mat-icon *ngIf="!mushroom.isEdible" color="warn">close</mat-icon>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Jadalny</th>
+        <td mat-cell *matCellDef="let mushroom">
+          <mat-icon *ngIf="mushroom.isEdible" color="primary">check</mat-icon>
+          <mat-icon *ngIf="!mushroom.isEdible" color="warn">close</mat-icon>
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <button mat-raised-button color="primary" (click)="toggleShowMore()" class="mt-2">
-    <mat-icon class="material-icons">directions_walk</mat-icon>
-    {{showMoreButtonLabel()}}
-  </button>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <button *ngIf="shouldShowShowMoreButton()" mat-raised-button color="primary" (click)="toggleShowMore()" class="mt-2">
+      <mat-icon class="material-icons">{{showMoreButtonIcon()}}</mat-icon>
+      {{showMoreButtonLabel()}}
+    </button>
+  </div>
 </div>

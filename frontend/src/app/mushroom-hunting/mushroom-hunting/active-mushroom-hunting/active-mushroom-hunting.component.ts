@@ -1,17 +1,17 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {MushroomHuntingGatewayService} from "../../mushroom-hunting-gateway.service";
 import {finalize} from "rxjs";
 import {MushroomHunting} from "../../../shared/model/mushrom-hunting";
-import {MushroomPrediction} from "../../../shared/model/mushroom-prediction";
 import {MushroomHuntingPrediction} from "../../../shared/model/mushroom-hunting-prediction";
+import {MushroomMapStoreService} from "../../../shared/mushroom-map-store/mushroom-map-store.service";
 
 @Component({
   selector: 'app-active-mushroom-hunting',
   templateUrl: './active-mushroom-hunting.component.html',
   styleUrls: ['./active-mushroom-hunting.component.css']
 })
-export class ActiveMushroomHuntingComponent {
+export class ActiveMushroomHuntingComponent implements OnInit {
 
   @Input()
   mushroomHunting?: MushroomHunting;
@@ -23,7 +23,12 @@ export class ActiveMushroomHuntingComponent {
   savingMushroomInfo = false;
 
   constructor(private router: Router,
-              private mushroomHuntingGatewayService: MushroomHuntingGatewayService) {
+              private mushroomHuntingGatewayService: MushroomHuntingGatewayService,
+              private mushroomStore: MushroomMapStoreService) {
+  }
+
+  ngOnInit(): void {
+    this.mushroomStore.setMushrooms(this.mushroomHunting?.mushrooms || []);
   }
 
   endMushroomHunting() {
@@ -62,7 +67,7 @@ export class ActiveMushroomHuntingComponent {
       }))
       .subscribe(resp => {
         this.mushroomHunting?.mushrooms.push(resp);
+        this.mushroomStore.setMushrooms(this.mushroomHunting?.mushrooms || []);
       });
   }
-
 }
