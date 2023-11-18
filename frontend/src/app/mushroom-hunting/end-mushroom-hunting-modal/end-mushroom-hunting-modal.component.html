@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Zakończ grzybobranie</h1>
+<div mat-dialog-content>
+  <p>Zmień status</p>
+  <mat-form-field>
+    <mat-select [(value)]="visibility">
+      <mat-option [value]="MushroomHuntingVisibility.PUBLIC">Publiczne</mat-option>
+      <mat-option [value]="MushroomHuntingVisibility.PRIVATE">Prywatne</mat-option>
+      <mat-option [value]="MushroomHuntingVisibility.SHARED">Udostępnione</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-button [mat-dialog-close]="visibility" cdkFocusInitial>Zatwierdź</button>
+</div>

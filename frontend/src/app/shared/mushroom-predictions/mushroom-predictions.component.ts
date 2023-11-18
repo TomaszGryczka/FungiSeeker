@@ -11,12 +11,12 @@ export class MushroomPredictionsComponent {
 
   @Input()
   mushroomPrediction?: MushroomHuntingPrediction;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-
-  shouldShowMore = false;
 
   @Output()
   mushroomSelected = new EventEmitter<MushroomHuntingPrediction>();
+
+  displayedColumns: string[] = ['name', 'weight'];
+  selectedRowIndex = -1;
 
   constructor() {
   }
@@ -27,6 +27,7 @@ export class MushroomPredictionsComponent {
   }
 
   chooseMushroom(selectedPrediction: MushroomPrediction) {
+    this.selectedRowIndex = selectedPrediction.mushroomPredictionId;
     this.mushroomSelected.emit({
       mushroomId: this.mushroomPrediction?.mushroomId,
       mushroomPredictions: [selectedPrediction]

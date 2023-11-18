@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -52,7 +53,11 @@ public class MushroomHuntingService {
                 .orElse(null);
     }
 
-    public Long deactivateMushroomHunting() {
+    public Long deactivateMushroomHunting(final MushroomHuntingVisibility visibility) {
+        if (Objects.isNull(visibility)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Visibility cannot be null");
+        }
+        
         final Long userId = appUserService.getUserId();
         final var mushroomHunting =
                 mushroomHuntingRepository.findFirstByUserIdAndMushroomHuntingStatusOrderByStartDateDesc(
@@ -63,6 +68,7 @@ public class MushroomHuntingService {
         mushroomHunting.ifPresent(mh -> {
                     mh.setMushroomHuntingStatus(MushroomHuntingStatus.FINISHED);
                     mh.setEndDate(LocalDateTime.now());
+                    mh.setVisibility(visibility);
                     mushroomHuntingRepository.save(mh);
                 }
         );

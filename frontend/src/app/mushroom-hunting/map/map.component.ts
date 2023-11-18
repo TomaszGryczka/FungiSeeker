@@ -41,7 +41,7 @@ export class MapComponent implements AfterViewInit {
     this.mushroomStoreService.getMushrooms().subscribe(mushrooms => {
       if (mushrooms) {
         this.markerService.markMushroomsOnMap(mushrooms, this.markers);
-        if (this.markers) {
+        if (this.markers && this.markers.getLayers().length > 0) {
           this.map?.fitBounds(this.markers.getBounds());
         }
       }

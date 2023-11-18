@@ -47,4 +47,7 @@ public class MushroomHunting {
     @OneToMany(mappedBy = "mushroomHunting", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Mushroom> mushrooms;
+
+    @Enumerated(EnumType.STRING)
+    private MushroomHuntingVisibility visibility;
 }

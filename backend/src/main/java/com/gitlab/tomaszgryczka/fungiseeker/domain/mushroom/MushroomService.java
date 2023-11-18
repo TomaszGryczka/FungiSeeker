@@ -1,6 +1,7 @@
 package com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom;
 
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomPredictionDTO;
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.UpdateInfoDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingService;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.blobStorage.AzureStorageAccountGateway;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.blobStorage.ImageSavingException;
@@ -52,7 +53,10 @@ public class MushroomService {
                 .build();
     }
 
-    public Mushroom updateMushroomInfo(final MushroomPredictionDTO prediction) {
+    public Mushroom updateMushroomInfo(final UpdateInfoDTO updateInfoDTO) {
+        final String description = updateInfoDTO.description();
+        final var prediction = updateInfoDTO.mushroomPrediction();
+
         final var mushroom = mushroomRepository.findById(prediction.mushroomId())
                 .orElseThrow(() -> new RuntimeException("Mushroom with id " + prediction.mushroomId() + " not found"));
 
@@ -61,8 +65,8 @@ public class MushroomService {
         return mushroomRepository.save(
                 mushroom.toBuilder()
                         .name(selectedPrediction.map(MushroomPrediction::name).orElse(null))
+                        .description(description)
                         .isEdible(selectedPrediction.map(MushroomPrediction::isEdible).orElse(null))
-                        .description(selectedPrediction.map(MushroomPrediction::description).orElse(null))
                         .build()
         );
     }
