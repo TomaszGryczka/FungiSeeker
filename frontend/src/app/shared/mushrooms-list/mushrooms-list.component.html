@@ -18,7 +18,7 @@
 
       <ng-container matColumnDef="weight">
         <th mat-header-cell *matHeaderCellDef> Opis</th>
-        <td mat-cell *matCellDef="let mushroom"> {{mushroom.description}} </td>
+        <td mat-cell *matCellDef="let mushroom"> {{mushroom.description | replaceEmptyData: "—" }} </td>
       </ng-container>
 
       <ng-container matColumnDef="symbol">

@@ -7,10 +7,11 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import { MushroomsListComponent } from './mushrooms-list/mushrooms-list.component';
+import {MushroomsListComponent} from './mushrooms-list/mushrooms-list.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
-import { MushroomPredictionsComponent } from './mushroom-predictions/mushroom-predictions.component';
+import {MushroomPredictionsComponent} from './mushroom-predictions/mushroom-predictions.component';
+import {ReplaceEmptyDataPipe} from './replace-empty-data-pipe/replace-empty-data.pipe';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { MushroomPredictionsComponent } from './mushroom-predictions/mushroom-pr
     UpperBarComponent,
     LowerBarComponent,
     MushroomsListComponent,
-    MushroomPredictionsComponent
+    MushroomPredictionsComponent,
+    ReplaceEmptyDataPipe
   ],
   imports: [
     CommonModule,
@@ -30,13 +32,13 @@ import { MushroomPredictionsComponent } from './mushroom-predictions/mushroom-pr
     MatTableModule,
     MatCardModule
   ],
-    exports: [
-        LoadingAppComponent,
-        UpperBarComponent,
-        LowerBarComponent,
-        MushroomsListComponent,
-        MushroomPredictionsComponent
-    ]
+  exports: [
+    LoadingAppComponent,
+    UpperBarComponent,
+    LowerBarComponent,
+    MushroomsListComponent,
+    MushroomPredictionsComponent
+  ]
 })
 export class BaseComponentsModule {
 }

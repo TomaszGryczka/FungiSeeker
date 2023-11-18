@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Predykcja gatunku</h1>
+<div mat-dialog-content class="pb-0">
+  <p>Wybierz gatunek z listy</p>
+  <app-mushroom-predictions
+    [mushroomPrediction]="data"
+    (mushroomSelected)="onMushroomSelected($event)"
+  ></app-mushroom-predictions>
+  <mat-form-field class="mt-3">
+    <mat-label>Krótki opis</mat-label>
+    <textarea matInput placeholder="Podaj opis..." [(ngModel)]="description"></textarea>
+    <mat-icon matSuffix>short_text</mat-icon>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-button [mat-dialog-close]="getUpdateInfo()" [disabled]="!selectedPrediction" >Zatwierdź</button>
+</div>

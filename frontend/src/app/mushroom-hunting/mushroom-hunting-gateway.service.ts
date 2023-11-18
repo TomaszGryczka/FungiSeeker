@@ -6,6 +6,7 @@ import {environment} from "../../environments/environment";
 import {MushroomPrediction} from "../shared/model/mushroom-prediction";
 import {MushroomHuntingPrediction} from "../shared/model/mushroom-hunting-prediction";
 import {Mushroom} from "../shared/model/mushroom";
+import {MushroomHuntingVisibility} from "../shared/model/mushroom-hunting-visibility";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,9 @@ export class MushroomHuntingGatewayService {
     return this.httpClient.get<MushroomHunting>(`${this.MUSHROOM_HUNTING_URL}/active`);
   }
 
-  endMushroomHunting(): Observable<number> {
-    return this.httpClient.post<number>(`${this.MUSHROOM_HUNTING_URL}/deactivate`, null);
+  endMushroomHunting(visibility: MushroomHuntingVisibility): Observable<number> {
+    return this.httpClient.post<number>(`${this.MUSHROOM_HUNTING_URL}/deactivate`,
+      {visibility: visibility} as MushroomHuntingEndRequest);
   }
 
   addMushroomToHunting(file: File): Observable<MushroomHuntingPrediction> {
@@ -31,8 +33,20 @@ export class MushroomHuntingGatewayService {
     return this.httpClient.post<MushroomHuntingPrediction>(`${this.MUSHROOM_HUNTING_URL}/addMushroom`, formData);
   }
 
-  updateMushroomInfoWithSelectedPrediction(prediction: MushroomHuntingPrediction): Observable<Mushroom> {
-    return this.httpClient.post<Mushroom>(`${this.MUSHROOM_HUNTING_URL}/updateMushroomInfo`, prediction);
+  updateMushroomInfoWithSelectedPrediction(updateInfo: UpdateMushroomInfoData): Observable<Mushroom> {
+    return this.httpClient.post<Mushroom>(`${this.MUSHROOM_HUNTING_URL}/updateMushroomInfo`, updateInfo);
   }
 
 }
+
+export interface MushroomHuntingEndRequest {
+  visibility: MushroomHuntingVisibility;
+  users: number[];
+}
+
+export interface UpdateMushroomInfoData {
+  description: string | null;
+  mushroomPrediction: MushroomHuntingPrediction;
+}
+
+

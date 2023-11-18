@@ -8,7 +8,7 @@
         </h2>
       </div>
       <div class="text-center">
-        <input type="file" accept="image/*" (change)="processMushroomPhoto($event)" #uploader hidden>
+        <input type="file" accept="image/*" (change)="processMushroomPhoto($event)" onclick="this.value=null;" #uploader hidden>
         <button mat-raised-button color="primary" (click)="uploader.click()"
                 [disabled]="processingMushroomPhoto">
           <mat-icon *ngIf="!processingMushroomPhoto" class="material-icons">photo_camera</mat-icon>
@@ -17,7 +17,7 @@
           </mat-icon>
           Zrób zdjęcie
         </button>
-        <button class="ms-2" mat-raised-button color="warn" (click)="endMushroomHunting()"
+        <button class="ms-2" mat-raised-button color="warn" (click)="openEndMushroomHuntingModal()"
                 [disabled]="endingMushroomHunting">
           <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">check_circle</mat-icon>
           <mat-icon *ngIf="endingMushroomHunting">
@@ -31,12 +31,7 @@
           <mat-spinner color="primary" diameter="20"></mat-spinner>
         </mat-icon>
         <ng-container *ngIf="!savingMushroomInfo">
-          <app-mushrooms-list *ngIf="!mushroomPredictions" [mushrooms]="mushroomHunting?.mushrooms"></app-mushrooms-list>
-          <app-mushroom-predictions
-            *ngIf="mushroomPredictions"
-            [mushroomPrediction]="mushroomPredictions"
-            (mushroomSelected)="onMushroomSelected($event)"
-          ></app-mushroom-predictions>
+          <app-mushrooms-list [mushrooms]="mushroomHunting?.mushrooms"></app-mushrooms-list>
         </ng-container>
       </div>
     </div>

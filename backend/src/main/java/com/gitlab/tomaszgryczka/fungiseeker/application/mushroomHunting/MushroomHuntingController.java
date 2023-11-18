@@ -2,8 +2,11 @@ package com.gitlab.tomaszgryczka.fungiseeker.application.mushroomHunting;
 
 
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingDTO;
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingEndRequest;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomPredictionDTO;
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.UpdateInfoDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingService;
+import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingVisibility;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom.Mushroom;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom.MushroomService;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +27,8 @@ public class MushroomHuntingController {
     }
 
     @PostMapping("/deactivate")
-    public Long deactivateMushroomHunting() {
-        return mushroomHuntingService.deactivateMushroomHunting();
+    public Long deactivateMushroomHunting(@RequestBody MushroomHuntingEndRequest request) {
+        return mushroomHuntingService.deactivateMushroomHunting(request.visibility());
     }
 
     @PostMapping("/addMushroom")
@@ -34,7 +37,7 @@ public class MushroomHuntingController {
     }
 
     @PostMapping("/updateMushroomInfo")
-    public Mushroom updateMushroomInfo(@RequestBody MushroomPredictionDTO mushroomPrediction) {
-        return mushroomService.updateMushroomInfo(mushroomPrediction);
+    public Mushroom updateMushroomInfo(@RequestBody UpdateInfoDTO updateInfoDTO) {
+        return mushroomService.updateMushroomInfo(updateInfoDTO);
     }
 }

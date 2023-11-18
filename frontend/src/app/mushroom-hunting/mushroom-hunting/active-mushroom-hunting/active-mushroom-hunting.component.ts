@@ -1,10 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {MushroomHuntingGatewayService} from "../../mushroom-hunting-gateway.service";
+import {MushroomHuntingGatewayService, UpdateMushroomInfoData} from "../../mushroom-hunting-gateway.service";
 import {finalize} from "rxjs";
 import {MushroomHunting} from "../../../shared/model/mushrom-hunting";
 import {MushroomHuntingPrediction} from "../../../shared/model/mushroom-hunting-prediction";
 import {MushroomStoreService} from "../../../shared/mushroom-map-store/mushroom-store.service";
+import {MatDialog} from "@angular/material/dialog";
+import {EndMushroomHuntingModalComponent} from "../../end-mushroom-hunting-modal/end-mushroom-hunting-modal.component";
+import {MushroomHuntingVisibility} from "../../../shared/model/mushroom-hunting-visibility";
+import {MushroomPredictionsModalComponent} from "../../mushroom-predictions-modal/mushroom-predictions-modal.component";
+import {MushroomPrediction} from "../../../shared/model/mushroom-prediction";
 
 @Component({
   selector: 'app-active-mushroom-hunting',
@@ -24,16 +29,41 @@ export class ActiveMushroomHuntingComponent implements OnInit {
 
   constructor(private router: Router,
               private mushroomHuntingGatewayService: MushroomHuntingGatewayService,
-              private mushroomStore: MushroomStoreService) {
+              private mushroomStore: MushroomStoreService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.mushroomStore.setMushrooms(this.mushroomHunting?.mushrooms || []);
   }
 
-  endMushroomHunting() {
+  openEndMushroomHuntingModal() {
+    const dialogRef = this.dialog.open(EndMushroomHuntingModalComponent);
+
+    dialogRef.afterClosed().subscribe((visibility: MushroomHuntingVisibility) => {
+      if (visibility) {
+        this.endMushroomHunting(visibility);
+      }
+    });
+  }
+
+  openMushroomPredictionsModal(predictions: MushroomHuntingPrediction) {
+    const dialogRef = this.dialog.open(MushroomPredictionsModalComponent, {
+      data: predictions,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe((updateInfo: UpdateMushroomInfoData) => {
+      if (updateInfo && updateInfo.mushroomPrediction) {
+        this.onMushroomSelected(updateInfo);
+      }
+    });
+  }
+
+
+  endMushroomHunting(visibility: MushroomHuntingVisibility) {
     this.endingMushroomHunting = true;
-    this.mushroomHuntingGatewayService.endMushroomHunting()
+    this.mushroomHuntingGatewayService.endMushroomHunting(visibility)
       .pipe(finalize(() => this.endingMushroomHunting = false))
       .subscribe((id) => {
         this.router.navigate(["/new-mushroom-hunting/" + id]).then(() => {
@@ -51,6 +81,7 @@ export class ActiveMushroomHuntingComponent implements OnInit {
         .subscribe(resp => {
           if (resp) {
             this.mushroomPredictions = resp;
+            this.openMushroomPredictionsModal(resp);
           } else {
             this.mushroomPredictions = undefined;
           }
@@ -58,9 +89,9 @@ export class ActiveMushroomHuntingComponent implements OnInit {
     }
   }
 
-  onMushroomSelected(prediction: MushroomHuntingPrediction) {
+  onMushroomSelected(updateInfo: UpdateMushroomInfoData) {
     this.savingMushroomInfo = true;
-    this.mushroomHuntingGatewayService.updateMushroomInfoWithSelectedPrediction(prediction)
+    this.mushroomHuntingGatewayService.updateMushroomInfoWithSelectedPrediction(updateInfo)
       .pipe(finalize(() => {
         this.mushroomPredictions = undefined;
         this.savingMushroomInfo = false;

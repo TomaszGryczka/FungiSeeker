@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {InjectionToken, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MushroomHuntingComponent} from './mushroom-hunting/mushroom-hunting.component';
 import {BaseComponentsModule} from "../shared/base-components.module";
@@ -12,6 +12,11 @@ import { NoneMushroomHuntingComponent } from './mushroom-hunting/none-mushroom-h
 import {MatInputModule} from "@angular/material/input";
 import { ActiveMushroomHuntingComponent } from './mushroom-hunting/active-mushroom-hunting/active-mushroom-hunting.component';
 import { FinishedMushroomHuntingComponent } from './finished-mushroom-hunting/finished-mushroom-hunting.component';
+import { EndMushroomHuntingModalComponent } from './end-mushroom-hunting-modal/end-mushroom-hunting-modal.component';
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
+import { MushroomPredictionsModalComponent } from './mushroom-predictions-modal/mushroom-predictions-modal.component';
 
 
 @NgModule({
@@ -20,7 +25,9 @@ import { FinishedMushroomHuntingComponent } from './finished-mushroom-hunting/fi
     MapComponent,
     NoneMushroomHuntingComponent,
     ActiveMushroomHuntingComponent,
-    FinishedMushroomHuntingComponent
+    FinishedMushroomHuntingComponent,
+    EndMushroomHuntingModalComponent,
+    MushroomPredictionsModalComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +38,12 @@ import { FinishedMushroomHuntingComponent } from './finished-mushroom-hunting/fi
     MatProgressSpinnerModule,
     MatCardModule,
     MatInputModule,
-  ]
+    MatDialogModule,
+    FormsModule,
+    MatSelectModule,
+    ReactiveFormsModule
+  ],
+  providers: []
 })
 export class MushroomHuntingModule {
 }
