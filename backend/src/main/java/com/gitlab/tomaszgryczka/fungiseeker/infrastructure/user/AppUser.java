@@ -19,4 +19,7 @@ public class AppUser {
 
     @Column(name = "auth0_id")
     private String auth0Id;
+
+    private String name;
+    private String nickname;
 }

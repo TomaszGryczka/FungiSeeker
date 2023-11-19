@@ -1,9 +1,16 @@
 package com.gitlab.tomaszgryczka.fungiseeker.infrastructure.user;
 
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.AppUserDTO;
+import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.auth0.Auth0User;
+import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.auth0.Auth0UserRetriever;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 
 @RequiredArgsConstructor
 @Service
@@ -11,6 +18,7 @@ public class AppUserService {
 
     private final AppUserRepository appUserRepository;
     private final AppUserJdbcRepository appUserJdbcRepository;
+    private final Auth0UserRetriever auth0UserRetriever;
 
     @Value("${spring.security.enabled}")
     private boolean securityEnabled;
@@ -21,8 +29,12 @@ public class AppUserService {
             final boolean userNotExists = !appUserRepository.existsByAuth0Id(userAuth0Id);
 
             if (userNotExists) {
+                final Auth0User auth0User = auth0UserRetriever.getUserInfoFromAuth0();
+
                 appUserRepository.save(AppUser.builder()
                         .auth0Id(userAuth0Id)
+                        .name(auth0User.name())
+                        .nickname(auth0User.nickname())
                         .build());
             }
         }
@@ -35,5 +47,15 @@ public class AppUserService {
         } else {
             return 1L;
         }
+    }
+
+    public Collection<AppUserDTO> getAllUsers() {
+        return appUserRepository.findAll().stream()
+                .map(appUser -> AppUserDTO.builder()
+                        .id(appUser.getId())
+                        .name(appUser.getName())
+                        .nickname(appUser.getNickname())
+                        .build())
+                .collect(Collectors.toList());
     }
 }

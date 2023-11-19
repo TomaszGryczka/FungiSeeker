@@ -8,6 +8,7 @@
       <mat-option [value]="MushroomHuntingVisibility.SHARED">Udostępnione</mat-option>
     </mat-select>
   </mat-form-field>
+  <app-user-multi-select *ngIf="visibility === MushroomHuntingVisibility.SHARED"></app-user-multi-select>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Anuluj</button>
