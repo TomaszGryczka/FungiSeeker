@@ -38,7 +38,10 @@ export class ActiveMushroomHuntingComponent implements OnInit {
   }
 
   openEndMushroomHuntingModal() {
-    const dialogRef = this.dialog.open(EndMushroomHuntingModalComponent);
+    const dialogRef = this.dialog.open(EndMushroomHuntingModalComponent,
+      {
+        autoFocus: false
+      });
 
     dialogRef.afterClosed().subscribe((visibility: MushroomHuntingVisibility) => {
       if (visibility) {

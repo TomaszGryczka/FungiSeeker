@@ -1,11 +1,15 @@
 package com.gitlab.tomaszgryczka.fungiseeker.infrastructure.user;
 
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.AppUserDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.auth0.Auth0User;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.auth0.Auth0UserRetriever;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -43,5 +47,15 @@ public class AppUserService {
         } else {
             return 1L;
         }
+    }
+
+    public Collection<AppUserDTO> getAllUsers() {
+        return appUserRepository.findAll().stream()
+                .map(appUser -> AppUserDTO.builder()
+                        .id(appUser.getId())
+                        .name(appUser.getName())
+                        .nickname(appUser.getNickname())
+                        .build())
+                .collect(Collectors.toList());
     }
 }

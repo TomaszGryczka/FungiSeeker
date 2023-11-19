@@ -1,0 +1,26 @@
+<div>
+  <app-loading-app *ngIf="!allUsersLoaded" [diameter]="30"></app-loading-app>
+  <ng-container>
+    <p>Komu udostępnisz?</p>
+    <mat-form-field *ngIf="allUsersLoaded">
+      <mat-label>Uzytkownicy</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Wybór użytkownika">
+        <ng-container *ngFor="let user of selectedUsers">
+          <mat-chip-row (removed)="remove(user)">
+            {{getUserFullName(user)}}
+            <button matChipRemove [attr.aria-label]="'remove ' + getUserFullName(user)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        </ng-container>
+      </mat-chip-grid>
+      <input placeholder="Nazwa użytkownika..." #userInput [formControl]="userCtrl"
+             [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="add($event)"/>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let user of filteredUsers | async" [value]="user" [disabled]="isUserSelectDisabled(user)">{{getUserFullName(user)}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </ng-container>
+</div>

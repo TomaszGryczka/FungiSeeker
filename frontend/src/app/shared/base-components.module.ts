@@ -12,6 +12,11 @@ import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
 import {MushroomPredictionsComponent} from './mushroom-predictions/mushroom-predictions.component';
 import {ReplaceEmptyDataPipe} from './replace-empty-data-pipe/replace-empty-data.pipe';
+import { UserMultiSelectComponent } from './user-multi-select/user-multi-select.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatChipsModule} from "@angular/material/chips";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -21,7 +26,8 @@ import {ReplaceEmptyDataPipe} from './replace-empty-data-pipe/replace-empty-data
     LowerBarComponent,
     MushroomsListComponent,
     MushroomPredictionsComponent,
-    ReplaceEmptyDataPipe
+    ReplaceEmptyDataPipe,
+    UserMultiSelectComponent
   ],
   imports: [
     CommonModule,
@@ -30,14 +36,19 @@ import {ReplaceEmptyDataPipe} from './replace-empty-data-pipe/replace-empty-data
     MatIconModule,
     MatButtonModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    ReactiveFormsModule
   ],
   exports: [
     LoadingAppComponent,
     UpperBarComponent,
     LowerBarComponent,
     MushroomsListComponent,
-    MushroomPredictionsComponent
+    MushroomPredictionsComponent,
+    UserMultiSelectComponent
   ]
 })
 export class BaseComponentsModule {
