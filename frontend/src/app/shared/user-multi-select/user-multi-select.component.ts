@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatChipInputEvent} from "@angular/material/chips";
@@ -12,6 +12,9 @@ import {AppUser, UserGatewayService} from "./user-gateway.service";
   styleUrls: ['./user-multi-select.component.css']
 })
 export class UserMultiSelectComponent implements OnInit {
+
+  @Output()
+  selectedUsersEvent = new EventEmitter<AppUser[]>();
 
   @ViewChild("userInput")
   userInput?: ElementRef<HTMLInputElement>;
@@ -57,6 +60,7 @@ export class UserMultiSelectComponent implements OnInit {
       this.userInput.nativeElement.value = '';
     }
     this.userCtrl.setValue(null);
+    this.selectedUsersEvent.emit(this.selectedUsers);
   }
 
   private filter(value: string | AppUser): AppUser[] {

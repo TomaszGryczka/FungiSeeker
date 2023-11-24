@@ -50,7 +50,10 @@ public class AppUserService {
     }
 
     public Collection<AppUserDTO> getAllUsers() {
+        final Long selfUserId = getUserId();
+
         return appUserRepository.findAll().stream()
+                .filter(appUser -> !appUser.getId().equals(selfUserId))
                 .map(appUser -> AppUserDTO.builder()
                         .id(appUser.getId())
                         .name(appUser.getName())

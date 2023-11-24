@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MushroomHuntingVisibility} from "../../shared/model/mushroom-hunting-visibility";
+import {AppUser} from "../../shared/user-multi-select/user-gateway.service";
 
 @Component({
   selector: 'app-end-mushroom-hunting-modal',
@@ -10,6 +11,7 @@ import {MushroomHuntingVisibility} from "../../shared/model/mushroom-hunting-vis
 export class EndMushroomHuntingModalComponent {
 
   visibility = MushroomHuntingVisibility.PUBLIC;
+  selectedUsers: AppUser[] = [];
 
   constructor(public dialogRef: MatDialogRef<EndMushroomHuntingModalComponent>) {
   }
@@ -18,6 +20,22 @@ export class EndMushroomHuntingModalComponent {
     this.dialogRef.close();
   }
 
+  onSelectionChange(users: AppUser[]) {
+    this.selectedUsers = users;
+  }
+
+  toEndMushroomHuntingModalData(): EndMushroomHuntingModalData {
+    return {
+      visibility: this.visibility,
+      selectedUsers: this.selectedUsers
+    };
+  }
+
 
   protected readonly MushroomHuntingVisibility = MushroomHuntingVisibility;
+}
+
+export interface EndMushroomHuntingModalData {
+  visibility: MushroomHuntingVisibility;
+  selectedUsers: AppUser[];
 }
