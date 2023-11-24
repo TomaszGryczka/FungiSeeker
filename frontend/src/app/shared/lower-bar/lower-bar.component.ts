@@ -19,6 +19,6 @@ export class LowerBarComponent {
   }
 
   navigateToAllMushroomHunting() {
-    this.router.navigate(["/settings"]).then(() => {});
+    this.router.navigate(["/all-mushroom-hunting"]).then(() => {});
   }
 }
