@@ -11,6 +11,9 @@ import {
 import {
   FinishedMushroomHuntingComponent
 } from "./mushroom-hunting/finished-mushroom-hunting/finished-mushroom-hunting.component";
+import {
+  MushroomHuntingListComponent
+} from "./mushroom-hunting-list/mushroom-hunting-list/mushroom-hunting-list.component";
 
 const authGuard = environment.shouldAuthenticate ? [AuthGuard] : [];
 
@@ -38,6 +41,11 @@ const routes: Routes = [
   {
     path: 'finished-mushroom-hunting/:id',
     component: FinishedMushroomHuntingComponent,
+    canActivate: authGuard
+  },
+  {
+    path: 'all-mushroom-hunting',
+    component: MushroomHuntingListComponent,
     canActivate: authGuard
   },
   {

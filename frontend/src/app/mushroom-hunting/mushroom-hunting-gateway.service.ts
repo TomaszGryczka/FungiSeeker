@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {MushroomHunting} from "../shared/model/mushrom-hunting";
 import {environment} from "../../environments/environment";
-import {MushroomPrediction} from "../shared/model/mushroom-prediction";
 import {MushroomHuntingPrediction} from "../shared/model/mushroom-hunting-prediction";
 import {Mushroom} from "../shared/model/mushroom";
 import {MushroomHuntingVisibility} from "../shared/model/mushroom-hunting-visibility";
+import {AppUser} from "../shared/user-multi-select/user-gateway.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +22,11 @@ export class MushroomHuntingGatewayService {
     return this.httpClient.get<MushroomHunting>(`${this.MUSHROOM_HUNTING_URL}/active`);
   }
 
-  endMushroomHunting(visibility: MushroomHuntingVisibility): Observable<number> {
-    return this.httpClient.post<number>(`${this.MUSHROOM_HUNTING_URL}/deactivate`,
-      {visibility: visibility} as MushroomHuntingEndRequest);
+  endMushroomHunting(visibility: MushroomHuntingVisibility, sharedTo?: AppUser[]): Observable<number> {
+    return this.httpClient.post<number>(`${this.MUSHROOM_HUNTING_URL}/deactivate`, {
+      visibility: visibility,
+      users: sharedTo?.map(user => user.id) || []
+    } as MushroomHuntingEndRequest);
   }
 
   addMushroomToHunting(file: File): Observable<MushroomHuntingPrediction> {

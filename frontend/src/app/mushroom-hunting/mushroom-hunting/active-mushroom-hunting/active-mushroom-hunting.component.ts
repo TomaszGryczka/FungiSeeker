@@ -6,7 +6,10 @@ import {MushroomHunting} from "../../../shared/model/mushrom-hunting";
 import {MushroomHuntingPrediction} from "../../../shared/model/mushroom-hunting-prediction";
 import {MushroomStoreService} from "../../../shared/mushroom-map-store/mushroom-store.service";
 import {MatDialog} from "@angular/material/dialog";
-import {EndMushroomHuntingModalComponent} from "../../end-mushroom-hunting-modal/end-mushroom-hunting-modal.component";
+import {
+  EndMushroomHuntingModalComponent,
+  EndMushroomHuntingModalData
+} from "../../end-mushroom-hunting-modal/end-mushroom-hunting-modal.component";
 import {MushroomHuntingVisibility} from "../../../shared/model/mushroom-hunting-visibility";
 import {MushroomPredictionsModalComponent} from "../../mushroom-predictions-modal/mushroom-predictions-modal.component";
 import {MushroomPrediction} from "../../../shared/model/mushroom-prediction";
@@ -43,9 +46,9 @@ export class ActiveMushroomHuntingComponent implements OnInit {
         autoFocus: false
       });
 
-    dialogRef.afterClosed().subscribe((visibility: MushroomHuntingVisibility) => {
-      if (visibility) {
-        this.endMushroomHunting(visibility);
+    dialogRef.afterClosed().subscribe((endMushroomHuntingModalData: EndMushroomHuntingModalData) => {
+      if (endMushroomHuntingModalData && endMushroomHuntingModalData.visibility) {
+        this.endMushroomHunting(endMushroomHuntingModalData);
       }
     });
   }
@@ -64,9 +67,10 @@ export class ActiveMushroomHuntingComponent implements OnInit {
   }
 
 
-  endMushroomHunting(visibility: MushroomHuntingVisibility) {
+  endMushroomHunting(endMushroomHuntingModalData: EndMushroomHuntingModalData) {
     this.endingMushroomHunting = true;
-    this.mushroomHuntingGatewayService.endMushroomHunting(visibility)
+    this.mushroomHuntingGatewayService.endMushroomHunting(
+      endMushroomHuntingModalData.visibility, endMushroomHuntingModalData.selectedUsers)
       .pipe(finalize(() => this.endingMushroomHunting = false))
       .subscribe((id) => {
         this.router.navigate(["/new-mushroom-hunting/" + id]).then(() => {

@@ -28,7 +28,7 @@ public class MushroomHuntingController {
 
     @PostMapping("/deactivate")
     public Long deactivateMushroomHunting(@RequestBody MushroomHuntingEndRequest request) {
-        return mushroomHuntingService.deactivateMushroomHunting(request.visibility());
+        return mushroomHuntingService.deactivateMushroomHunting(request.visibility(), request.users());
     }
 
     @PostMapping("/addMushroom")

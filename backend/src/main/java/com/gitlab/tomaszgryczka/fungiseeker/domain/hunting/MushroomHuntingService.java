@@ -1,5 +1,6 @@
 package com.gitlab.tomaszgryczka.fungiseeker.domain.hunting;
 
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.AppUserDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.coordinates.Coordinates;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom.Mushroom;
@@ -13,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -56,9 +58,17 @@ public class MushroomHuntingService {
                 .orElse(null);
     }
 
-    public Long deactivateMushroomHunting(final MushroomHuntingVisibility visibility) {
+    public Long deactivateMushroomHunting(final MushroomHuntingVisibility visibility, final List<Long> sharedToUsers) {
         if (Objects.isNull(visibility)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Visibility cannot be null");
+        } else if (Objects.nonNull(sharedToUsers) && !sharedToUsers.isEmpty()) {
+            final var allUsersIds = appUserService.getAllUsers().stream()
+                    .map(AppUserDTO::id)
+                    .collect(Collectors.toSet());
+
+            if (!allUsersIds.containsAll(sharedToUsers)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shared users list contains not existing users");
+            }
         }
 
         final Long userId = appUserService.getUserId();
@@ -73,6 +83,7 @@ public class MushroomHuntingService {
                     mh.setMushroomHuntingStatus(MushroomHuntingStatus.FINISHED);
                     mh.setEndDate(LocalDateTime.now());
                     mh.setVisibility(visibility);
+                    mh.setSharedUsers(sharedToUsers);
                     mushroomHuntingRepository.save(mh);
                 }
         );

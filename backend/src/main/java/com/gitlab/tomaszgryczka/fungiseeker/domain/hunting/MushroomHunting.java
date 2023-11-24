@@ -50,4 +50,9 @@ public class MushroomHunting {
 
     @Enumerated(EnumType.STRING)
     private MushroomHuntingVisibility visibility;
+
+    @ElementCollection
+    @CollectionTable(name = "shared_users", joinColumns = @JoinColumn(name = "mushroom_hunting_id"))
+    @Column(name = "user_id")
+    private List<Long> sharedUsers;
 }
