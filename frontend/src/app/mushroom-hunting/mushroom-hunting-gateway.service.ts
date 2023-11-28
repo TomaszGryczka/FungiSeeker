@@ -6,7 +6,7 @@ import {environment} from "../../environments/environment";
 import {MushroomHuntingPrediction} from "../shared/model/mushroom-hunting-prediction";
 import {Mushroom} from "../shared/model/mushroom";
 import {MushroomHuntingVisibility} from "../shared/model/mushroom-hunting-visibility";
-import {AppUser} from "../shared/user-multi-select/user-gateway.service";
+import {AppUser} from "../shared/user/user-gateway.service";
 
 @Injectable({
   providedIn: 'root'

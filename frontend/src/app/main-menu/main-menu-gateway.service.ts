@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
+import {MainMenuData} from "./main-menu.component";
 
 @Injectable({
   providedIn: "root"
@@ -13,7 +14,7 @@ export class MainMenuGateway {
   constructor(private httpClient: HttpClient) {
   }
 
-  fetchMainMenuTitle(): Observable<string> {
-    return this.httpClient.get(this.MAIN_MENU_TITLE_URL, {responseType: "text"});
+  fetchMainMenuData(): Observable<MainMenuData> {
+    return this.httpClient.get<MainMenuData>(this.MAIN_MENU_TITLE_URL);
   }
 }

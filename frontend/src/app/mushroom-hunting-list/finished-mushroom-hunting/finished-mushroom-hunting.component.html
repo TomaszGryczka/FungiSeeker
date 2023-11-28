@@ -1,16 +1,15 @@
 <table class="table-app-container">
   <tr class="h-100">
     <td style="vertical-align: top" class="p-0">
-      <app-upper-bar [shouldShowBackButton]="true" [barTitle]="'Sesja grzybobrania'"></app-upper-bar>
+      <app-upper-bar [shouldShowBackButton]="true" [barTitle]="'Grzybobranie'"></app-upper-bar>
       <app-loading-app *ngIf="isLoading"></app-loading-app>
-      <app-mushroom-hunting-view *ngIf="shouldShowActiveMushroomHunting()"
+      <app-mushroom-hunting-view *ngIf="shouldShowHunting()"
                                    [mushroomHunting]="mushroomHunting"></app-mushroom-hunting-view>
-      <app-none-mushroom-hunting *ngIf="shouldShowNoneMushroomHunting()"></app-none-mushroom-hunting>
     </td>
   </tr>
   <tr>
     <td style="vertical-align: bottom" class="p-0">
-      <app-map *ngIf="shouldShowActiveMushroomHunting()"></app-map>
+      <app-map *ngIf="shouldShowHunting()"></app-map>
       <app-lower-bar></app-lower-bar>
     </td>
   </tr>

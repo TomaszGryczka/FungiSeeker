@@ -1,1 +1,60 @@
-<p>mushroom-hunting-list works!</p>
+<table class="table-app-container">
+  <tr class="h-100">
+    <td style="vertical-align: top" class="p-0">
+      <app-upper-bar [shouldShowBackButton]="true" [barTitle]="'Lista grzybobrań'"></app-upper-bar>
+      <app-loading-app *ngIf="loadingMushroomHuntingList"></app-loading-app>
+      <div *ngIf="!loadingMushroomHuntingList">
+        <div class="mb-3">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Tutaj znajdziesz grzybobrania!</mat-card-title>
+              <mat-card-subtitle>
+                Poniżej widoczne są Twoje grzybobrania, grzybobrania publiczne innych użytkowników
+                oraz udostępnione.
+              </mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
+        <div *ngIf="getMushroomHuntingList().length === 0">
+          <h3>Brak grzybobrań do wyświetlenia.</h3>
+        </div>
+        <div *ngIf="getMushroomHuntingList().length !== 0">
+          <table mat-table [dataSource]="getFirstSixIfShouldNotShowMore()" class="mat-elevation-z8">
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>Zdjęcie</th>
+              <td mat-cell *matCellDef="let hunting">
+                <img class="img-fluid p-2" *ngIf="hunting.randomImageUrl" [src]="hunting.randomImageUrl" alt="mushroom">
+                <img class="img-fluid p-2" *ngIf="!hunting.randomImageUrl" src="/assets/icons/no_image.png"
+                     alt="mushroom">
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nazwa</th>
+              <td mat-cell *matCellDef="let hunting"> {{hunting.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="weight">
+              <th mat-header-cell *matHeaderCellDef> Opis</th>
+              <td mat-cell *matCellDef="let hunting"> {{hunting.description | replaceEmptyData: "—" }} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onHuntingSelected(row)"></tr>
+          </table>
+          <button *ngIf="shouldShowShowMoreButton()" mat-raised-button color="primary" (click)="toggleShowMore()"
+                  class="mt-2">
+            <mat-icon class="material-icons">{{showMoreButtonIcon()}}</mat-icon>
+            {{showMoreButtonLabel()}}
+          </button>
+        </div>
+      </div>
+
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: bottom" class="p-0">
+      <app-lower-bar></app-lower-bar>
+    </td>
+  </tr>
+</table>

@@ -10,16 +10,17 @@ import {
   EndMushroomHuntingModalComponent,
   EndMushroomHuntingModalData
 } from "../../end-mushroom-hunting-modal/end-mushroom-hunting-modal.component";
-import {MushroomHuntingVisibility} from "../../../shared/model/mushroom-hunting-visibility";
 import {MushroomPredictionsModalComponent} from "../../mushroom-predictions-modal/mushroom-predictions-modal.component";
-import {MushroomPrediction} from "../../../shared/model/mushroom-prediction";
+import {AuthService} from "@auth0/auth0-angular";
+import {UserGatewayService} from "../../../shared/user/user-gateway.service";
+import {MushroomHuntingStatus} from "../../../shared/model/mushroom-hunting-status";
 
 @Component({
-  selector: 'app-active-mushroom-hunting',
-  templateUrl: './active-mushroom-hunting.component.html',
-  styleUrls: ['./active-mushroom-hunting.component.css']
+  selector: 'app-mushroom-hunting-view',
+  templateUrl: './mushroom-hunting-view.component.html',
+  styleUrls: ['./mushroom-hunting-view.component.css']
 })
-export class ActiveMushroomHuntingComponent implements OnInit {
+export class MushroomHuntingViewComponent implements OnInit {
 
   @Input()
   mushroomHunting?: MushroomHunting;
@@ -30,14 +31,19 @@ export class ActiveMushroomHuntingComponent implements OnInit {
   processingMushroomPhoto = false;
   savingMushroomInfo = false;
 
+  hasAccess = false;
+
   constructor(private router: Router,
               private mushroomHuntingGatewayService: MushroomHuntingGatewayService,
               private mushroomStore: MushroomStoreService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private auth: AuthService,
+              private userGatewayService: UserGatewayService) {
   }
 
   ngOnInit(): void {
     this.mushroomStore.setMushrooms(this.mushroomHunting?.mushrooms || []);
+    this.checkHasAccess();
   }
 
   openEndMushroomHuntingModal() {
@@ -107,5 +113,27 @@ export class ActiveMushroomHuntingComponent implements OnInit {
         this.mushroomHunting?.mushrooms.push(resp);
         this.mushroomStore.setMushrooms(this.mushroomHunting?.mushrooms || []);
       });
+  }
+
+  mushroomHuntingStatusLabel(): string {
+    if (this.mushroomHunting?.status === MushroomHuntingStatus.ACTIVE) {
+      return "AKTYWNE";
+    } else {
+      return "ZAKOŃCZONE";
+    }
+  }
+
+  checkHasAccess(): void {
+    const mushroomHuntingStatus = this.mushroomHunting?.status;
+    const mushroomHuntingOwner = this.mushroomHunting?.userId;
+
+    this.userGatewayService.getMe().subscribe(me => {
+        if (me) {
+          this.hasAccess = mushroomHuntingOwner === me.id && mushroomHuntingStatus === MushroomHuntingStatus.ACTIVE;
+        } else {
+          this.hasAccess = false;
+        }
+      }
+    );
   }
 }

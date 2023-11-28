@@ -61,4 +61,16 @@ public class AppUserService {
                         .build())
                 .collect(Collectors.toList());
     }
+
+    public AppUserDTO getMe() {
+        final Long selfUserId = getUserId();
+
+        return appUserRepository.findById(selfUserId)
+                .map(appUser -> AppUserDTO.builder()
+                        .id(appUser.getId())
+                        .name(appUser.getName())
+                        .nickname(appUser.getNickname())
+                        .build())
+                .orElse(null);
+    }
 }

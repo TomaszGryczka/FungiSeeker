@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {MainMenuGateway} from "./main-menu-gateway.service";
 import {AuthProviderService} from "../security/auth-provider.service";
+import {Mushroom} from "../shared/model/mushroom";
+import {MushroomHunting} from "../shared/model/mushrom-hunting";
 
 @Component({
   selector: 'main-menu',
@@ -12,8 +14,8 @@ export class MainMenuComponent implements OnInit {
   title = "";
   isLoading = true;
 
-  loadingLastMushroomHunting = true;
-  loadedLastMushroomHunting = "";
+  loadingMainMenuData = true;
+  loadedMainMenuData?: MainMenuData;
 
   constructor(private mainMenuGateway: MainMenuGateway,
               private auth: AuthProviderService) {
@@ -32,9 +34,15 @@ export class MainMenuComponent implements OnInit {
   }
 
   private loadLastMushroomHunting(): void {
-    this.mainMenuGateway.fetchMainMenuTitle().subscribe((hunting) => {
-      this.loadedLastMushroomHunting = hunting;
-      this.loadingLastMushroomHunting = false;
+    this.mainMenuGateway.fetchMainMenuData().subscribe((data) => {
+      this.loadedMainMenuData = data;
+      this.loadingMainMenuData = false;
+      console.log(this.loadedMainMenuData);
     });
   }
+}
+
+export interface MainMenuData {
+  mushrooms: Mushroom[];
+  mushroomHunting: MushroomHunting[];
 }

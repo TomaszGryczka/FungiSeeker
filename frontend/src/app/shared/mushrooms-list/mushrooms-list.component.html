@@ -1,6 +1,6 @@
 <div class="text-center">
   <div *ngIf="getMushroomsList().length === 0">
-    <h3>Nie znalazłeś jeszcze żadnych grzybów!</h3>
+    <h3>Brak grzybów do wyświetlenia!</h3>
   </div>
   <div *ngIf="getMushroomsList().length !== 0">
     <table mat-table [dataSource]="getFirstTwoIfShouldNotShowMore()" class="mat-elevation-z8">

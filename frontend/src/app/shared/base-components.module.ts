@@ -48,7 +48,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     LowerBarComponent,
     MushroomsListComponent,
     MushroomPredictionsComponent,
-    UserMultiSelectComponent
+    UserMultiSelectComponent,
+    ReplaceEmptyDataPipe
   ]
 })
 export class BaseComponentsModule {

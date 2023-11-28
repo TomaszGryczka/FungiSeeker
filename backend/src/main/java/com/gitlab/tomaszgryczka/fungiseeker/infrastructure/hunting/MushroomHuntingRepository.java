@@ -16,4 +16,6 @@ public interface MushroomHuntingRepository extends JpaRepository<MushroomHunting
 
     @Query("SELECT mh FROM MushroomHunting mh WHERE mh.userId = ?1 OR mh.id IN (SELECT mh2.id FROM MushroomHunting mh2 JOIN mh2.sharedUsers su WHERE su = ?1)")
     Collection<MushroomHunting> findAllOwnedAndSharedToUser(Long userId);
+
+    Collection<MushroomHunting> findTop2ByUserIdOrderByIdDesc(Long userId);
 }

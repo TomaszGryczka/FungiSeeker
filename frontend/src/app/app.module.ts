@@ -11,6 +11,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {MainMenuModule} from "./main-menu/main-menu.module";
 import {MushroomHuntingModule} from "./mushroom-hunting/mushroom-hunting.module";
 import {NewMushroomHuntingModule} from "./new-mushroom-hunting/new-mushroom-hunting.module";
+import {MushroomHuntingListModule} from "./mushroom-hunting-list/mushroom-hunting-list.module";
 
 const serviceWorkerConfig = {
   enabled: !isDevMode(),
@@ -40,7 +41,8 @@ const authConfig = {
     AuthModule.forRoot(authConfig),
     MainMenuModule,
     MushroomHuntingModule,
-    NewMushroomHuntingModule
+    NewMushroomHuntingModule,
+    MushroomHuntingListModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
