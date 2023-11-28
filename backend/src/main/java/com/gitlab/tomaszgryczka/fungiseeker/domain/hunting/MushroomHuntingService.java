@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -90,6 +91,21 @@ public class MushroomHuntingService {
 
         return mushroomHunting.map(MushroomHunting::getId).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User has no active mushroom hunting"));
+    }
+
+    // TODO VALIDATE IF USER HAS ACCESS TO THIS MUSHROOM HUNTING
+    public MushroomHuntingDTO getMushroomHunting(final Long id) {
+        final var mushroomHunting = mushroomHuntingRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Mushroom hunting not found"));
+
+        return MushroomHuntingDTO.fromMushroomHunting(mushroomHunting);
+    }
+
+    public Collection<MushroomHuntingDTO> getLastTwoMushroomHunting() {
+        final Long userId = appUserService.getUserId();
+        return mushroomHuntingRepository.findTop2ByUserIdOrderByIdDesc(userId).stream()
+                .map(MushroomHuntingDTO::fromMushroomHunting)
+                .collect(Collectors.toList());
     }
 
     private void validateUserHasNoActiveMushroomHunting() {

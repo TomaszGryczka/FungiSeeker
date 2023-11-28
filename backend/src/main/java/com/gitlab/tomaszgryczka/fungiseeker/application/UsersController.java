@@ -20,4 +20,9 @@ public class UsersController {
     public Collection<AppUserDTO> getUsers() {
         return appUserService.getAllUsers();
     }
+
+    @GetMapping("/me")
+    public AppUserDTO getMe() {
+        return appUserService.getMe();
+    }
 }

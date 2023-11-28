@@ -4,7 +4,7 @@ import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {finalize, map, Observable, startWith} from "rxjs";
-import {AppUser, UserGatewayService} from "./user-gateway.service";
+import {AppUser, UserGatewayService} from "../user/user-gateway.service";
 
 @Component({
   selector: 'app-user-multi-select',

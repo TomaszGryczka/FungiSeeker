@@ -6,11 +6,11 @@ import {environment} from "../environments/environment";
 import {MushroomHuntingComponent} from "./mushroom-hunting/mushroom-hunting/mushroom-hunting.component";
 import {NewMushroomHuntingComponent} from "./new-mushroom-hunting/new-mushroom-hunting/new-mushroom-hunting.component";
 import {
-  ActiveMushroomHuntingComponent
-} from "./mushroom-hunting/mushroom-hunting/active-mushroom-hunting/active-mushroom-hunting.component";
+  MushroomHuntingViewComponent
+} from "./mushroom-hunting/mushroom-hunting/active-mushroom-hunting/mushroom-hunting-view.component";
 import {
   FinishedMushroomHuntingComponent
-} from "./mushroom-hunting/finished-mushroom-hunting/finished-mushroom-hunting.component";
+} from "./mushroom-hunting-list/finished-mushroom-hunting/finished-mushroom-hunting.component";
 import {
   MushroomHuntingListComponent
 } from "./mushroom-hunting-list/mushroom-hunting-list/mushroom-hunting-list.component";
@@ -35,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'active-mushroom-hunting',
-    component: ActiveMushroomHuntingComponent,
+    component: MushroomHuntingViewComponent,
     canActivate: authGuard
   },
   {

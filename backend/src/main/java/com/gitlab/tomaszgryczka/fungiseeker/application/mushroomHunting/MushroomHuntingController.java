@@ -40,4 +40,9 @@ public class MushroomHuntingController {
     public Mushroom updateMushroomInfo(@RequestBody UpdateInfoDTO updateInfoDTO) {
         return mushroomService.updateMushroomInfo(updateInfoDTO);
     }
+
+    @GetMapping("/{id}")
+    public MushroomHuntingDTO getMushroomHunting(@PathVariable Long id) {
+        return mushroomHuntingService.getMushroomHunting(id);
+    }
 }

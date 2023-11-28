@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MushroomHuntingVisibility} from "../../shared/model/mushroom-hunting-visibility";
-import {AppUser} from "../../shared/user-multi-select/user-gateway.service";
+import {AppUser} from "../../shared/user/user-gateway.service";
 
 @Component({
   selector: 'app-end-mushroom-hunting-modal',

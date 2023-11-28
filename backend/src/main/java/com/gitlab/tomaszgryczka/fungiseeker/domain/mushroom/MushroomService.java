@@ -1,5 +1,6 @@
 package com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom;
 
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomPredictionDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.UpdateInfoDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingService;
@@ -14,7 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -69,5 +72,11 @@ public class MushroomService {
                         .isEdible(selectedPrediction.map(MushroomPrediction::isEdible).orElse(null))
                         .build()
         );
+    }
+
+    public Collection<MushroomDTO> getLastTwoMushrooms() {
+        return mushroomRepository.findTop2ByUserIdOrderByIdDesc(appUserService.getUserId()).stream()
+                .map(MushroomDTO::fromMushroom)
+                .collect(Collectors.toList());
     }
 }

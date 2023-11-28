@@ -4,10 +4,10 @@
       <div class="text-center">
         <h2>
           Status grzybobrania:
-          <span class="badge bg-success">AKTWYNY</span>
+          <span class="badge bg-success">{{mushroomHuntingStatusLabel()}}</span>
         </h2>
       </div>
-      <div class="text-center">
+      <div class="text-center" *ngIf="hasAccess">
         <input type="file" accept="image/*" (change)="processMushroomPhoto($event)" onclick="this.value=null;" #uploader hidden>
         <button mat-raised-button color="primary" (click)="uploader.click()"
                 [disabled]="processingMushroomPhoto">

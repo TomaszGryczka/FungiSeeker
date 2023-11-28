@@ -15,6 +15,10 @@ export class UserGatewayService {
   fetchAllUsers(): Observable<AppUser[]> {
     return this.httpClient.get<AppUser[]>(this.USERS_URL);
   }
+
+  getMe(): Observable<AppUser> {
+    return this.httpClient.get<AppUser>(`${this.USERS_URL}/me`);
+  }
 }
 
 export interface AppUser {
