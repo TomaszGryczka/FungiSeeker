@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "@auth0/auth0-angular";
-import {MainMenuComponent} from "./main-menu/main-menu.component";
+import {MainMenuComponent} from "./main-menu/mian-menu/main-menu.component";
 import {environment} from "../environments/environment";
 import {MushroomHuntingComponent} from "./mushroom-hunting/mushroom-hunting/mushroom-hunting.component";
 import {NewMushroomHuntingComponent} from "./new-mushroom-hunting/new-mushroom-hunting/new-mushroom-hunting.component";

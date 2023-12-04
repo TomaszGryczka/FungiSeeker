@@ -10,23 +10,23 @@
         <div class="row">
           <h3>Grzyby</h3>
           <div class="col-6">
-            <img src="assets/icons/icon-1024x1024.png" style="max-width: 90%; border-radius: 10%;" class="img-fluid" alt="Image 1">
-            <p>Description for first image</p>
+            <img [src]="getFirstMushroom().imageUrl" class="img-fluid" alt="Image 1">
+            <p>{{getFirstMushroom().description}}</p>
           </div>
           <div class="col-6">
-            <img src="assets/icons/icon-1024x1024.png" style="max-width: 90%; border-radius: 10%;" class="img-fluid" alt="Image 2">
-            <p>Description for second image</p>
+            <img [src]="getSecondMushroom().imageUrl" class="img-fluid" alt="Image 1">
+            <p>{{getSecondMushroom().description}}</p>
           </div>
         </div>
         <div class="row">
           <h3>Grzybobrania</h3>
           <div class="col-6">
-            <img src="assets/icons/icon-1024x1024.png" style="max-width: 90%; border-radius: 10%;" class="img-fluid" alt="Image 1">
-            <p>Description for first image</p>
+            <img [src]="getFirstMushroomHunting().mushrooms[0].imageUrl" class="img-fluid" alt="Image 1">
+            <p>{{getFirstMushroomHunting().description}}</p>
           </div>
           <div class="col-6">
-            <img src="assets/icons/icon-1024x1024.png" style="max-width: 90%; border-radius: 10%;" class="img-fluid" alt="Image 2">
-            <p>Description for second image</p>
+            <img [src]="getSecondMushroomHunting().mushrooms[0].imageUrl" class="img-fluid" alt="Image 2">
+            <p>{{getSecondMushroomHunting().description}}</p>
           </div>
         </div>
       </div>
