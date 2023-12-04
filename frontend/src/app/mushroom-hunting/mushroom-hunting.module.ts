@@ -10,9 +10,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatCardModule} from "@angular/material/card";
 import {NoneMushroomHuntingComponent} from './mushroom-hunting/none-mushroom-hunting/none-mushroom-hunting.component';
 import {MatInputModule} from "@angular/material/input";
-import {
-  MushroomHuntingViewComponent
-} from './mushroom-hunting/active-mushroom-hunting/mushroom-hunting-view.component';
+import {MushroomHuntingViewComponent} from './mushroom-hunting/active-mushroom-hunting/mushroom-hunting-view.component';
 import {
   FinishedMushroomHuntingComponent
 } from '../mushroom-hunting-list/finished-mushroom-hunting/finished-mushroom-hunting.component';
@@ -21,6 +19,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MushroomPredictionsModalComponent} from './mushroom-predictions-modal/mushroom-predictions-modal.component';
+import {MatListModule} from "@angular/material/list";
 
 
 @NgModule({
@@ -45,7 +44,11 @@ import {MushroomPredictionsModalComponent} from './mushroom-predictions-modal/mu
     MatDialogModule,
     FormsModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatListModule
+  ],
+  exports: [
+    MapComponent
   ],
   providers: []
 })

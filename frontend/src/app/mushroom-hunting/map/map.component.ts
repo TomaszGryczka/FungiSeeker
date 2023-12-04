@@ -2,6 +2,7 @@ import {AfterViewInit, Component} from '@angular/core';
 import {FeatureGroup, Map, map, tileLayer} from 'leaflet';
 import {MushroomStoreService} from "../../shared/mushroom-map-store/mushroom-store.service";
 import {MarkerService} from "./marker.service";
+import {MushroomHuntingStoreService} from "../../shared/hunting-map-store/mushroom-hunting-store.service";
 
 @Component({
   selector: 'app-map',
@@ -14,7 +15,8 @@ export class MapComponent implements AfterViewInit {
   private markers?: FeatureGroup;
 
   constructor(private markerService: MarkerService,
-              private mushroomStoreService: MushroomStoreService) {
+              private mushroomStoreService: MushroomStoreService,
+              private mushroomHuntingStoreService: MushroomHuntingStoreService) {
   }
 
 
@@ -41,6 +43,15 @@ export class MapComponent implements AfterViewInit {
     this.mushroomStoreService.getMushrooms().subscribe(mushrooms => {
       if (mushrooms) {
         this.markerService.markMushroomsOnMap(mushrooms, this.markers);
+        if (this.markers && this.markers.getLayers().length > 0) {
+          this.map?.fitBounds(this.markers.getBounds());
+        }
+      }
+    });
+
+    this.mushroomHuntingStoreService.getHunting().subscribe(hunting => {
+      if (hunting) {
+        this.markerService.markHuntingOnMap(hunting, this.markers);
         if (this.markers && this.markers.getLayers().length > 0) {
           this.map?.fitBounds(this.markers.getBounds());
         }

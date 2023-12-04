@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="text-center mr-0">
   <div *ngIf="getMushroomsList().length === 0">
     <h3>Brak grzybów do wyświetlenia!</h3>
   </div>
@@ -32,7 +32,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <button *ngIf="shouldShowShowMoreButton()" mat-raised-button color="primary" (click)="toggleShowMore()" class="mt-2">
+    <button *ngIf="shouldShowShowMoreButton()" mat-raised-button color="primary" (click)="toggleShowMore()"
+            class="mt-2">
       <mat-icon class="material-icons">{{showMoreButtonIcon()}}</mat-icon>
       {{showMoreButtonLabel()}}
     </button>

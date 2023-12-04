@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MushroomHuntingListGatewayService, StrippedMushroomHunting} from "../mushroom-hunting-list-gateway.service";
 import {finalize} from "rxjs";
 import {Router} from "@angular/router";
+import {MushroomHuntingStoreService} from "../../shared/hunting-map-store/mushroom-hunting-store.service";
 
 @Component({
   selector: 'app-mushroom-hunting-list',
@@ -16,6 +17,7 @@ export class MushroomHuntingListComponent implements OnInit {
   shouldShowMore = false;
 
   constructor(private mushroomHuntingListGateway: MushroomHuntingListGatewayService,
+              private mushroomHuntingStore: MushroomHuntingStoreService,
               private router: Router) {
   }
 
@@ -30,6 +32,7 @@ export class MushroomHuntingListComponent implements OnInit {
       .subscribe((mushroomHuntingList: StrippedMushroomHunting[]) => {
         if (mushroomHuntingList) {
           this.mushroomHuntingList = mushroomHuntingList;
+          this.mushroomHuntingStore.setHunting(mushroomHuntingList);
         }
       });
   }
@@ -39,11 +42,11 @@ export class MushroomHuntingListComponent implements OnInit {
   }
 
   getFirstSixIfShouldNotShowMore(): StrippedMushroomHunting[] {
-    return this.shouldShowMore ? this.getMushroomHuntingList() : this.getMushroomHuntingList().slice(0, 6);
+    return this.shouldShowMore ? this.getMushroomHuntingList() : this.getMushroomHuntingList().slice(0, 2);
   }
 
   shouldShowShowMoreButton(): boolean {
-    return this.getMushroomHuntingList().length > 6;
+    return this.getMushroomHuntingList().length > 2;
   }
 
   toggleShowMore() {

@@ -117,10 +117,15 @@ export class MushroomHuntingViewComponent implements OnInit {
 
   mushroomHuntingStatusLabel(): string {
     if (this.mushroomHunting?.status === MushroomHuntingStatus.ACTIVE) {
-      return "AKTYWNE";
+      return "AKTYWNA";
     } else {
-      return "ZAKOŃCZONE";
+      return "ZAKOŃCZONA";
     }
+  }
+
+  getDate(date: string | undefined): string {
+    // format date to hh:mm dd.MM.yyyy
+    return date ? new Date(date).toLocaleString('pl-PL') : "";
   }
 
   checkHasAccess(): void {

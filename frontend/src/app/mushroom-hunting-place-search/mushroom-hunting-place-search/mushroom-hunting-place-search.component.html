@@ -1,0 +1,33 @@
+<table class="table-app-container">
+  <tr class="h-100">
+    <td style="vertical-align: top" class="p-0">
+      <app-upper-bar [shouldShowBackButton]=true [barTitle]="'Miejscówka'"></app-upper-bar>
+      <div class="ms-3 mt-3">
+        <mat-list>
+          <h2>Wybrano miejsce:</h2>
+          <mat-list-item>
+            <span matListItemTitle>użytkownik</span>
+            <span matListItemLine>Paweł</span>
+          </mat-list-item>
+          <mat-list-item lines="3">
+            <span matListItemTitle>znalezione grzyby</span>
+            15 x borowik szlachetny, 2 x kurka, 1 x podgrzybek brunatny, 1 x maślak, 1 x koźlarz, 1 x muchomor czerwony
+          </mat-list-item>
+          <mat-list-item lines="10">
+            <span matListItemTitle>lokalizacja na mapach google</span>
+            <button class="mt-2" mat-raised-button color="primary">
+              <mat-icon class="material-icons">map</mat-icon>
+              Otwórz
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: bottom" class="p-0">
+      <app-map></app-map>
+      <app-lower-bar></app-lower-bar>
+    </td>
+  </tr>
+</table>
