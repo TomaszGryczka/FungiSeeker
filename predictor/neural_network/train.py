@@ -30,7 +30,7 @@ data = DataBlock(
     batch_tfms=[*aug_transforms(size=224, max_warp=0), Normalize.from_stats(*imagenet_stats)]
 )
 
-dls = data.dataloaders(path, bs=64)
+dls = data.dataloaders(path)
 
 dls.show_batch()
 
@@ -42,7 +42,7 @@ learner = Learner(dls, model=models.resnet34(), metrics=error_rate)
 
 learner.fit(16, lr=1e-3)
 
-learner.export("export.pkl")
+learner.export("model.pkl")
 
 plt.show()
 
