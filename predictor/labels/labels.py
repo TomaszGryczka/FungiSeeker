@@ -106,7 +106,11 @@ class Labels:
     def get_labels(self):
         return [label["label"] for label in self.labels_data]
     
-    def get_label_id_with_translation(self, label):
+    def get_label_id_with_translation(self, label, probability):
         for label_data in self.labels_data:
             if label_data["label"] == label:
-                return label_data["id"], label_data["translation"]
+                return {
+                    "id": label_data["id"],
+                    "name": label_data["translation"],
+                    "probability": round(probability, 2)
+                }

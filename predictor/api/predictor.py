@@ -10,9 +10,10 @@ from labels import Labels
 class Predictor:
     def __init__(self, model_url):
         self.model_url = model_url
-        self.model_path = Path("../models")
-        print(self.model_path.ls())
+        self.model_path = Path("./")
+        print("Starting download model...")
         self.download_model()
+        print("Finished downloading model...")
         self.labels = Labels()
     
     def download_file(self, url, dest):
@@ -20,7 +21,7 @@ class Predictor:
             open(dest, 'wb').write(r.content)
 
     def download_model(self):
-        # self.download_file(self.model_url, self.model_path/"model.pkl")
+        self.download_file(self.model_url, self.model_path/"model.pkl")
 
         self.learn = load_learner(self.model_path/"model.pkl")
 
@@ -29,6 +30,6 @@ class Predictor:
 
         pred_class, pred_idx, outputs = self.learn.predict(img_content)
 
-        return {"prediction": self.labels.get_label_id_with_translation(pred_class), "probability": outputs[pred_idx].item()}
+        return self.labels.get_label_id_with_translation(pred_class, outputs[pred_idx].item())
 
         
