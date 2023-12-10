@@ -12,6 +12,7 @@ import {MainMenuModule} from "./main-menu/main-menu.module";
 import {MushroomHuntingModule} from "./mushroom-hunting/mushroom-hunting.module";
 import {NewMushroomHuntingModule} from "./new-mushroom-hunting/new-mushroom-hunting.module";
 import {MushroomHuntingListModule} from "./mushroom-hunting-list/mushroom-hunting-list.module";
+import {MushroomHuntingPlaceSearchModule} from "./mushroom-hunting-place-search/mushroom-hunting-place-search.module";
 
 const serviceWorkerConfig = {
   enabled: !isDevMode(),
@@ -42,7 +43,8 @@ const authConfig = {
     MainMenuModule,
     MushroomHuntingModule,
     NewMushroomHuntingModule,
-    MushroomHuntingListModule
+    MushroomHuntingListModule,
+    MushroomHuntingPlaceSearchModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

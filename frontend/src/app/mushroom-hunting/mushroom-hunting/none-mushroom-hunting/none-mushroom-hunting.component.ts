@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
@@ -12,6 +12,12 @@ export class NoneMushroomHuntingComponent {
   }
 
   goToNewMushroomHunting() {
-    this.router.navigate(['/new-mushroom-hunting']).then(() => {});
+    this.router.navigate(['/new-mushroom-hunting']).then(() => {
+    });
+  }
+
+  goToMushroomHuntingPlaceSearch() {
+    this.router.navigate(['/mushroom-hunting-place-search']).then(() => {
+    });
   }
 }

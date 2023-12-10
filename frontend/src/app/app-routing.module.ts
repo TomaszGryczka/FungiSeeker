@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "@auth0/auth0-angular";
-import {MainMenuComponent} from "./main-menu/main-menu.component";
+import {MainMenuComponent} from "./main-menu/mian-menu/main-menu.component";
 import {environment} from "../environments/environment";
 import {MushroomHuntingComponent} from "./mushroom-hunting/mushroom-hunting/mushroom-hunting.component";
 import {NewMushroomHuntingComponent} from "./new-mushroom-hunting/new-mushroom-hunting/new-mushroom-hunting.component";
@@ -14,6 +14,9 @@ import {
 import {
   MushroomHuntingListComponent
 } from "./mushroom-hunting-list/mushroom-hunting-list/mushroom-hunting-list.component";
+import {
+  MushroomHuntingPlaceSearchComponent
+} from "./mushroom-hunting-place-search/mushroom-hunting-place-search/mushroom-hunting-place-search.component";
 
 const authGuard = environment.shouldAuthenticate ? [AuthGuard] : [];
 
@@ -46,6 +49,11 @@ const routes: Routes = [
   {
     path: 'all-mushroom-hunting',
     component: MushroomHuntingListComponent,
+    canActivate: authGuard
+  },
+  {
+    path: "mushroom-hunting-place-search",
+    component: MushroomHuntingPlaceSearchComponent,
     canActivate: authGuard
   },
   {

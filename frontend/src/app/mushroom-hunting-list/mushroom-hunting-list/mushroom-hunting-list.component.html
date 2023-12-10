@@ -18,7 +18,7 @@
         <div *ngIf="getMushroomHuntingList().length === 0">
           <h3>Brak grzybobrań do wyświetlenia.</h3>
         </div>
-        <div *ngIf="getMushroomHuntingList().length !== 0">
+        <div *ngIf="getMushroomHuntingList().length !== 0" class="text-center">
           <table mat-table [dataSource]="getFirstSixIfShouldNotShowMore()" class="mat-elevation-z8">
             <ng-container matColumnDef="position">
               <th mat-header-cell *matHeaderCellDef>Zdjęcie</th>
@@ -43,7 +43,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onHuntingSelected(row)"></tr>
           </table>
           <button *ngIf="shouldShowShowMoreButton()" mat-raised-button color="primary" (click)="toggleShowMore()"
-                  class="mt-2">
+                  class="mt-1 mb-1">
             <mat-icon class="material-icons">{{showMoreButtonIcon()}}</mat-icon>
             {{showMoreButtonLabel()}}
           </button>
@@ -54,6 +54,7 @@
   </tr>
   <tr>
     <td style="vertical-align: bottom" class="p-0">
+      <app-map></app-map>
       <app-lower-bar></app-lower-bar>
     </td>
   </tr>

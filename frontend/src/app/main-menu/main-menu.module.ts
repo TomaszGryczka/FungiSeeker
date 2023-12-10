@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {MainMenuComponent} from "./main-menu.component";
+import {MainMenuComponent} from "./mian-menu/main-menu.component";
 import {HttpClientModule} from "@angular/common/http";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";

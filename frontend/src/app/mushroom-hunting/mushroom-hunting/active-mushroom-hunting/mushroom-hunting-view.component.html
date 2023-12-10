@@ -1,11 +1,29 @@
 <div class="row g-0">
   <div class="col-12">
     <div class="m-2">
-      <div class="text-center">
-        <h2>
-          Status grzybobrania:
-          <span class="badge bg-success">{{mushroomHuntingStatusLabel()}}</span>
-        </h2>
+      <div>
+        <h2 class="mb-1">{{mushroomHunting?.name}}</h2>
+        <span>{{mushroomHunting?.description}}</span>
+        <div class="row">
+          <div class="col-6">
+            <mat-list>
+              <mat-list-item>
+                <span class="badge bg-success"></span>
+                <span matListItemTitle>status sesji</span>
+                <span matListItemLine>{{mushroomHuntingStatusLabel()}}</span>
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <div class="col-6">
+            <mat-list>
+              <mat-list-item>
+                <span class="badge bg-success"></span>
+                <span matListItemTitle>data rozpoczęcia</span>
+                <span matListItemLine>{{getDate(mushroomHunting?.startDate)}}</span>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
       </div>
       <div class="text-center" *ngIf="hasAccess">
         <input type="file" accept="image/*" (change)="processMushroomPhoto($event)" onclick="this.value=null;" #uploader hidden>
@@ -17,13 +35,20 @@
           </mat-icon>
           Zrób zdjęcie
         </button>
-        <button class="ms-2" mat-raised-button color="warn" (click)="openEndMushroomHuntingModal()"
+        <button class="ms-1" mat-raised-button color="warn" (click)="openEndMushroomHuntingModal()"
                 [disabled]="endingMushroomHunting">
           <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">check_circle</mat-icon>
           <mat-icon *ngIf="endingMushroomHunting">
             <mat-spinner color="primary" diameter="20"></mat-spinner>
           </mat-icon>
           Zakończ
+        </button>
+        <button class="ms-1" mat-raised-button [disabled]="endingMushroomHunting">
+          <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">chat</mat-icon>
+          <mat-icon *ngIf="endingMushroomHunting">
+            <mat-spinner color="primary" diameter="20"></mat-spinner>
+          </mat-icon>
+          Czat
         </button>
       </div>
       <div class="mt-3">
