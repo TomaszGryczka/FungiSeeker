@@ -21,9 +21,12 @@ class Predictor:
             open(dest, 'wb').write(r.content)
 
     def download_model(self):
-        self.download_file(self.model_url, self.model_path/"model.pkl")
+        model_file_path = self.model_path / "model.pkl"
 
-        self.learn = load_learner(self.model_path/"model.pkl")
+        if not os.path.exists(model_file_path):
+            self.download_file(self.model_url, model_file_path)
+
+        self.learn = load_learner(model_file_path)
 
     def predict(self, image_url):
         img_content = requests.get(image_url, stream=True).content
