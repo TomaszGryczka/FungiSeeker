@@ -25,6 +25,9 @@ jobs:
         env: 
           FUNGI_SEEKER_STORAGE_ACCOUNT_NAME: ${{ secrets.FUNGI_SEEKER_STORAGE_ACCOUNT_NAME }}
           FUNGI_SEEKER_STORAGE_ACCOUNT_KEY: ${{ secrets.FUNGI_SEEKER_STORAGE_ACCOUNT_KEY }}
+          FUNGI_SEEKER_PREDICTOR_PASSWORD: ${{ secrets.FUNGI_SEEKER_PREDICTOR_PASSWORD }}
+          FUNGI_SEEKER_PREDICTOR_MODEL_URL: ${{ secrets.FUNGI_SEEKER_PREDICTOR_MODEL_URL }}
+          FUNGI_SEEKER_PREDICTOR_URL: ${{ secrets.FUNGI_SEEKER_PREDICTOR_URL }}
         run: |
           cd ./backend
           mvn clean install
