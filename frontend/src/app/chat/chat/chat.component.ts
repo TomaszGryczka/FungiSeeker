@@ -39,7 +39,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
       document.cookie = 'X-Authorization=' + token + '; path=/';
 
-      this.webSocket = new WebSocket('ws://'+ environment.backendApiUrl +'/chat');
+      this.webSocket = new WebSocket(environment.backendApiUrlWs +'/chat');
 
       this.webSocket.onopen = (event) => {
         console.log('WebSocket Client Connected: ', event);
