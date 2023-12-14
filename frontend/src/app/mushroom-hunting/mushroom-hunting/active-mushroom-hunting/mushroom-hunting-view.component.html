@@ -25,29 +25,28 @@
           </div>
         </div>
       </div>
-      <div class="text-center" *ngIf="hasAccess">
-        <input type="file" accept="image/*" (change)="processMushroomPhoto($event)" onclick="this.value=null;" #uploader hidden>
-        <button mat-raised-button color="primary" (click)="uploader.click()"
-                [disabled]="processingMushroomPhoto">
-          <mat-icon *ngIf="!processingMushroomPhoto" class="material-icons">photo_camera</mat-icon>
-          <mat-icon *ngIf="processingMushroomPhoto">
-            <mat-spinner color="primary" diameter="20"></mat-spinner>
-          </mat-icon>
-          Zrób zdjęcie
-        </button>
-        <button class="ms-1" mat-raised-button color="warn" (click)="openEndMushroomHuntingModal()"
-                [disabled]="endingMushroomHunting">
-          <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">check_circle</mat-icon>
-          <mat-icon *ngIf="endingMushroomHunting">
-            <mat-spinner color="primary" diameter="20"></mat-spinner>
-          </mat-icon>
-          Zakończ
-        </button>
-        <button class="ms-1" mat-raised-button [disabled]="endingMushroomHunting">
-          <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">chat</mat-icon>
-          <mat-icon *ngIf="endingMushroomHunting">
-            <mat-spinner color="primary" diameter="20"></mat-spinner>
-          </mat-icon>
+      <div class="text-center" >
+        <ng-container *ngIf="hasAccess">
+          <input type="file" accept="image/*" (change)="processMushroomPhoto($event)" onclick="this.value=null;" #uploader hidden>
+          <button mat-raised-button color="primary" (click)="uploader.click()"
+                  [disabled]="processingMushroomPhoto">
+            <mat-icon *ngIf="!processingMushroomPhoto" class="material-icons">photo_camera</mat-icon>
+            <mat-icon *ngIf="processingMushroomPhoto">
+              <mat-spinner color="primary" diameter="20"></mat-spinner>
+            </mat-icon>
+            Zrób zdjęcie
+          </button>
+          <button class="ms-1" mat-raised-button color="warn" (click)="openEndMushroomHuntingModal()"
+                  [disabled]="endingMushroomHunting">
+            <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">check_circle</mat-icon>
+            <mat-icon *ngIf="endingMushroomHunting">
+              <mat-spinner color="primary" diameter="20"></mat-spinner>
+            </mat-icon>
+            Zakończ
+          </button>
+        </ng-container>
+        <button class="ms-1" mat-raised-button (click)="navigateToChat()">
+          <mat-icon class="material-icons">chat</mat-icon>
           Czat
         </button>
       </div>

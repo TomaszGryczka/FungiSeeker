@@ -23,11 +23,11 @@ export class MushroomsListComponent {
   }
 
   getFirstTwoIfShouldNotShowMore(): Mushroom[] {
-    return this.shouldShowMore ?  this.getMushroomsList() : this.getMushroomsList().slice(0, 2);
+    return this.shouldShowMore ?  this.getMushroomsList() : this.getMushroomsList().slice(0, 1);
   }
 
   shouldShowShowMoreButton(): boolean {
-    return this.getMushroomsList().length > 2;
+    return this.getMushroomsList().length > 1;
   }
 
   toggleShowMore() {
