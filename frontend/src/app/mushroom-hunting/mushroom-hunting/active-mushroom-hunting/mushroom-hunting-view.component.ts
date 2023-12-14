@@ -124,7 +124,6 @@ export class MushroomHuntingViewComponent implements OnInit {
   }
 
   getDate(date: string | undefined): string {
-    // format date to hh:mm dd.MM.yyyy
     return date ? new Date(date).toLocaleString('pl-PL') : "";
   }
 
@@ -140,5 +139,10 @@ export class MushroomHuntingViewComponent implements OnInit {
         }
       }
     );
+  }
+
+  navigateToChat(): void {
+    this.router.navigate(["/chat", this.mushroomHunting?.id]).then(() => {
+    });
   }
 }

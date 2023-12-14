@@ -73,4 +73,8 @@ public class AppUserService {
                         .build())
                 .orElse(null);
     }
+
+    public AppUser getAppUserByAuth0Id(String auth0Id) {
+        return appUserRepository.findByAuth0Id(auth0Id);
+    }
 }

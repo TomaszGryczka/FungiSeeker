@@ -1,0 +1,32 @@
+<ng-container *ngIf="isLoading">
+  <app-loading-app></app-loading-app>
+</ng-container>
+<table *ngIf="!isLoading" class="table-app-container">
+  <tr class="h-100">
+    <td style="vertical-align: top" class="p-0">
+      <app-upper-bar [shouldShowBackButton]=false barTitle="Czat"></app-upper-bar>
+      <div class="ms-3 mt-4">
+        <ng-container *ngFor="let message of messages">
+          <div>{{message.senderName}}: {{message.message}}</div>
+        </ng-container>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: bottom" class="p-0">
+      <div class="row">
+        <div class="col-8">
+          <input matInput type="text" [(ngModel)]="messageToSend" class="form-control m-1" placeholder="Wpisz wiadomość">
+        </div>
+        <div class="col-4">
+          <button mat-raised-button class="m-1" color="primary" (click)="sendInputMessage()">
+            <mat-icon>send</mat-icon>
+            Wyślij
+          </button>
+
+        </div>
+      </div>
+      <app-lower-bar></app-lower-bar>
+    </td>
+  </tr>
+</table>

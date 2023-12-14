@@ -1,6 +1,5 @@
 package com.gitlab.tomaszgryczka.fungiseeker.application;
 
-import com.azure.core.annotation.Get;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.StrippedMushroomHuntingDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.HuntingListService;
 import lombok.RequiredArgsConstructor;

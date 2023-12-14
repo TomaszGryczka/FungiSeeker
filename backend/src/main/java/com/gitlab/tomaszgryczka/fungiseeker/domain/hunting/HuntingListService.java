@@ -17,7 +17,14 @@ public class HuntingListService {
 
     public Collection<StrippedMushroomHuntingDTO> getAllHuntingAvailableForUser() {
         final Long userId = appUserService.getUserId();
+        return retrieveAllHuntingAvailableForUser(userId);
+    }
 
+    public Collection<StrippedMushroomHuntingDTO> getAllHuntingAvailableForUser(Long userId) {
+        return retrieveAllHuntingAvailableForUser(userId);
+    }
+
+    private Collection<StrippedMushroomHuntingDTO> retrieveAllHuntingAvailableForUser(Long userId) {
         return this.mushroomHuntingRepository.findAllOwnedAndSharedToUser(userId)
                 .stream()
                 .map(StrippedMushroomHuntingDTO::fromMushroomHunting)
