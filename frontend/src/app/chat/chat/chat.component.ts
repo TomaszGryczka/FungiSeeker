@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "@auth0/auth0-angular";
 import {ChatGatewayService} from "../chat-gateway.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-chat',
@@ -38,7 +39,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
       document.cookie = 'X-Authorization=' + token + '; path=/';
 
-      this.webSocket = new WebSocket('ws://localhost:8080/chat');
+      this.webSocket = new WebSocket('ws://'+ environment.backendApiUrl +'/chat');
 
       this.webSocket.onopen = (event) => {
         console.log('WebSocket Client Connected: ', event);
