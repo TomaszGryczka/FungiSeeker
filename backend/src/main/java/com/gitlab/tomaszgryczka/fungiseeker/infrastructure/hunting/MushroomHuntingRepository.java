@@ -14,7 +14,10 @@ public interface MushroomHuntingRepository extends JpaRepository<MushroomHunting
     Optional<MushroomHunting> findByUserIdAndMushroomHuntingStatus(Long userId, MushroomHuntingStatus status);
     Optional<MushroomHunting> findFirstByUserIdAndMushroomHuntingStatusOrderByStartDateDesc(Long userId, MushroomHuntingStatus status);
 
-    @Query("SELECT mh FROM MushroomHunting mh WHERE mh.userId = ?1 OR mh.id IN (SELECT mh2.id FROM MushroomHunting mh2 JOIN mh2.sharedUsers su WHERE su = ?1)")
+    @Query("SELECT mh FROM MushroomHunting mh " +
+            "WHERE mh.userId = ?1 " +
+            "OR mh.id IN (SELECT mh2.id FROM MushroomHunting mh2 JOIN mh2.sharedUsers su WHERE su = ?1) " +
+            "OR  mh.visibility = 'PUBLIC'")
     Collection<MushroomHunting> findAllOwnedAndSharedToUser(Long userId);
 
     Collection<MushroomHunting> findTop2ByUserIdOrderByIdDesc(Long userId);
