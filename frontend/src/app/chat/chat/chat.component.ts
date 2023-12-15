@@ -37,7 +37,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.auth.getAccessTokenSilently().subscribe(token => {
 
-      document.cookie = 'X-Authorization=' + token + '; path=/';
+      document.cookie = 'X-Authorization=' + token + '; path=/; secure; SameSite=None;';
 
       this.webSocket = new WebSocket(environment.backendApiUrlWs +'/chat');
 
