@@ -2,29 +2,32 @@
   <app-loading-app></app-loading-app>
 </ng-container>
 <table *ngIf="!isLoading" class="table-app-container">
-  <tr class="h-100">
-    <td style="vertical-align: top" class="p-0">
-      <app-upper-bar [shouldShowBackButton]=false barTitle="Czat"></app-upper-bar>
-      <div class="ms-3 mt-4">
-        <ng-container *ngFor="let message of messages">
-          <label class="badge bg-primary">{{message.timestamp | date:'HH:mm'}}</label>
-          <div>{{message.senderName}}: {{message.message}}</div>
-        </ng-container>
+  <tr>
+    <td style="vertical-align: top" class="p-0 h-100">
+      <app-upper-bar id="upper-bar" [shouldShowBackButton]=false barTitle="Czat"></app-upper-bar>
+      <div id="scroller" class="row g-0" [ngStyle]="chatHeightStyle">
+        <div class="col-12">
+          <ng-container *ngFor="let message of messages">
+            <div class="message">
+              <label><small>{{message.createDate | date:'HH:mm dd-MM-YYYY'}} - {{message.senderName}}</small></label>
+              <div class="mb-2">{{message.message}}</div>
+            </div>
+          </ng-container>
+        </div>
       </div>
     </td>
   </tr>
-  <tr>
+  <tr id="lower-bar">
     <td style="vertical-align: bottom" class="p-0">
-      <div class="row">
-        <div class="col-8">
-          <input matInput type="text" [(ngModel)]="messageToSend" class="form-control m-1" placeholder="Wpisz wiadomość">
+      <div class="row g-0">
+        <div class="col-10">
+          <input matInput type="text" [(ngModel)]="messageToSend" class="form-control m-2" placeholder="Wpisz wiadomość"
+                 (keydown)="onEnter($event)">
         </div>
-        <div class="col-4">
-          <button mat-raised-button class="m-1" color="primary" (click)="sendInputMessage()">
+        <div class="col-2">
+          <button mat-mini-fab class="mt-2 mb-2 ms-3" color="primary" (click)="sendInputMessage()">
             <mat-icon>send</mat-icon>
-            Wyślij
           </button>
-
         </div>
       </div>
       <app-lower-bar></app-lower-bar>

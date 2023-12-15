@@ -36,17 +36,17 @@ const authConfig = {
     AppComponent,
   ],
   imports: [
+    AuthModule.forRoot(authConfig),
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', serviceWorkerConfig),
-    AuthModule.forRoot(authConfig),
     MainMenuModule,
     MushroomHuntingModule,
     NewMushroomHuntingModule,
     MushroomHuntingListModule,
     MushroomHuntingPlaceSearchModule,
-    ChatModule
+    ChatModule,
+    AppRoutingModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
