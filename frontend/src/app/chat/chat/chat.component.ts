@@ -93,4 +93,5 @@ export interface ChatMessage {
   mushroomHuntingId: number;
   message?: string;
   senderName?: string;
+  timestamp?: string;
 }

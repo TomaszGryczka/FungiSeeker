@@ -22,7 +22,7 @@ import java.util.List;
 
 @Slf4j
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Value("${app.cors.allowed-origins}")
@@ -59,7 +59,7 @@ public class SecurityConfig {
         config.setAllowedOrigins(allowedOrigins);
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
-        config.setAllowCredentials(true);
+//        config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

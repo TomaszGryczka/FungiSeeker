@@ -7,6 +7,7 @@
       <app-upper-bar [shouldShowBackButton]=false barTitle="Czat"></app-upper-bar>
       <div class="ms-3 mt-4">
         <ng-container *ngFor="let message of messages">
+          <label class="badge bg-primary">{{message.timestamp | date:'HH:mm'}}</label>
           <div>{{message.senderName}}: {{message.message}}</div>
         </ng-container>
       </div>
