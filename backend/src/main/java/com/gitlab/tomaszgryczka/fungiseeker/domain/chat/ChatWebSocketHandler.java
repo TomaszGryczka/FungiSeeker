@@ -2,6 +2,7 @@ package com.gitlab.tomaszgryczka.fungiseeker.domain.chat;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.ChatMessageDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.chat.ChatMessageRepository;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.chat.ChatSessionRepository;
@@ -27,7 +28,12 @@ import java.util.Map;
 @Service
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper;
+
+    static {
+        objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+    }
+
     private final ChatMessageService chatMessageService;
     private final ChatSessionRepository chatSessionRepository;
     private final ChatMessageRepository chatMessageRepository;
@@ -56,7 +62,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             log.info("Existing session: {}", session.getId());
             var sessionsList = chatSessionRepository.findAllByMushroomHuntingId(receivedMessage.mushroomHuntingId());
 
-            chatMessageRepository.save(ChatMessage.builder()
+            var savedMessage = chatMessageRepository.save(ChatMessage.builder()
                     .senderName(user.getName())
                     .mushroomHuntingId(receivedMessage.mushroomHuntingId())
                     .message(receivedMessage.message())
@@ -64,7 +70,15 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
             sessionsList.forEach(se -> {
                 try {
-                    sessions.get(se.getSessionId()).sendMessage(new TextMessage(objectMapper.writeValueAsString(receivedMessage)));
+                    sessions.get(se.getSessionId())
+                            .sendMessage(
+                                    new TextMessage(objectMapper.writeValueAsString(
+                                            receivedMessage.toBuilder()
+                                                    .createDate(savedMessage.getCreateDate().format(ChatMessageDTO.formatter))
+                                                    .build())
+                                    )
+                            );
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
