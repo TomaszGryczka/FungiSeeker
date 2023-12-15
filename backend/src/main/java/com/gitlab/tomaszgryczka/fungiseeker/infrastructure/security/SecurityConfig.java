@@ -22,7 +22,7 @@ import java.util.List;
 
 @Slf4j
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SecurityConfig {
 
     @Value("${app.cors.allowed-origins}")
