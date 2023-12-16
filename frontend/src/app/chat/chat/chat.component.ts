@@ -36,12 +36,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const docHeight = document.documentElement.clientHeight;
-    const lowerBarHeight = document.getElementById("lower-bar")?.offsetHeight;
-    const upperBarHeight = document.getElementById("upper-bar")?.offsetHeight;
-    if (lowerBarHeight && docHeight && upperBarHeight) {
-      this.chatHeight = (docHeight - (lowerBarHeight + upperBarHeight));
-    }
+    setTimeout(() => {
+      const docHeight = document.documentElement.clientHeight;
+      const lowerBarHeight = document.getElementById("lower-bar")?.offsetHeight;
+      const upperBarHeight = document.getElementById("upper-bar")?.offsetHeight;
+      if (lowerBarHeight && docHeight && upperBarHeight) {
+        this.chatHeight = (docHeight - (lowerBarHeight + upperBarHeight));
+      }
+    });
   }
 
   get chatHeightStyle() {
@@ -55,8 +57,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isLoading = true;
     if (environment.shouldAuthenticate) {
       this.auth.getAccessTokenSilently().subscribe(token => {
-        document.cookie = 'X-Authorization=' + token + '; path=/; secure; SameSite=None; Domain=' + environment.cookieDomain + ';';
-        this.initConnection();
+        this.initConnection(token);
       });
     } else {
       this.initConnection();
@@ -96,8 +97,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 
-  private initConnection() {
-    this.webSocket = new WebSocket(environment.backendApiUrlWs + '/chat');
+  private initConnection(token: string | undefined  = undefined) {
+    this.webSocket = new WebSocket(environment.backendApiUrlWs + '/chat' + (token ? '?token=' + token : ''));
 
     this.webSocket.onopen = (event) => {
       console.log('WebSocket Client Connected: ', event);

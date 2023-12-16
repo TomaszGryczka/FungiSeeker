@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.ChatMessageDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.chat.ChatMessageRepository;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.chat.ChatSessionRepository;
+import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.jpa.JpaAuditor;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.user.AppUser;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -43,6 +44,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     @SneakyThrows
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) {
+        JpaAuditor.disableAuditing();
         ChatMessageDTO receivedMessage = objectMapper.readValue((String) message.getPayload(), ChatMessageDTO.class);
         log.info("Received message: {}", objectMapper.writeValueAsString(receivedMessage));
 
@@ -84,6 +86,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
                 }
             });
         }
+        JpaAuditor.enableAuditing();
     }
 
     @Override
