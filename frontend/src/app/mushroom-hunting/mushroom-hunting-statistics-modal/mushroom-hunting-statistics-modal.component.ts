@@ -27,7 +27,6 @@ export class MushroomHuntingStatisticsModalComponent implements OnInit {
     this.isLoading = true;
     this.userGateway.fetchAllUsers().subscribe(users => {
       if (users) {
-        console.log(users);
         this.userName = users.find(user => user.id === this.data.userId)?.name || '';
         if (!this.userName) {
           this.userGateway.getMe().subscribe(me => {
