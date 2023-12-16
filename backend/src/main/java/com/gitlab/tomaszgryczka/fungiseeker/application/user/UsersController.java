@@ -1,4 +1,4 @@
-package com.gitlab.tomaszgryczka.fungiseeker.application;
+package com.gitlab.tomaszgryczka.fungiseeker.application.user;
 
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.AppUserDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.user.AppUserService;

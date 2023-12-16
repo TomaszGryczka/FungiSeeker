@@ -1,6 +1,8 @@
 package com.gitlab.tomaszgryczka.fungiseeker.domain.hunting;
 
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.StrippedMushroomHuntingDTO;
+import com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom.Mushroom;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.hunting.MushroomHuntingRepository;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.user.AppUserService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,14 @@ public class HuntingListService {
                 .toList();
     }
 
+    public Collection<MushroomHunting> getAllHuntingAvailableForUserWithId() {
+        final Long userId = appUserService.getUserId();
+
+        return retrieveAllHuntingAvailableForUserWithId(userId).stream()
+                .filter(mushroomHunting -> !Objects.equals(mushroomHunting.getId(), 0L))
+                .toList();
+    }
+
     public Collection<StrippedMushroomHuntingDTO> getAllHuntingAvailableForUser(Long userId) {
         return retrieveAllHuntingAvailableForUser(userId);
     }
@@ -32,5 +42,9 @@ public class HuntingListService {
                 .stream()
                 .map(StrippedMushroomHuntingDTO::fromMushroomHunting)
                 .toList();
+    }
+
+    private Collection<MushroomHunting> retrieveAllHuntingAvailableForUserWithId(Long userId) {
+        return this.mushroomHuntingRepository.findAllOwnedAndSharedToUser(userId);
     }
 }

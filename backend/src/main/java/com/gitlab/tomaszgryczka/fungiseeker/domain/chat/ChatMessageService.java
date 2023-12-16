@@ -1,13 +1,8 @@
 package com.gitlab.tomaszgryczka.fungiseeker.domain.chat;
 
-import com.gitlab.tomaszgryczka.fungiseeker.application.MushroomHuntingListController;
-import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.ChatMessageDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.StrippedMushroomHuntingDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.HuntingListService;
-import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHunting;
-import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingService;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.chat.ChatMessageRepository;
-import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.hunting.MushroomHuntingRepository;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.user.AppUser;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.user.AppUserService;
 import lombok.RequiredArgsConstructor;

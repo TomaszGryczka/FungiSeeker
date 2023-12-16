@@ -68,6 +68,7 @@ public class MushroomService {
         return mushroomRepository.save(
                 mushroom.toBuilder()
                         .name(selectedPrediction.map(MushroomPrediction::name).orElse(null))
+                        .speciesId(selectedPrediction.map(MushroomPrediction::mushroomPredictionId).orElse(null))
                         .description(description)
                         .isEdible(selectedPrediction.map(MushroomPrediction::isEdible).orElse(null))
                         .build()

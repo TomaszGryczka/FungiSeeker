@@ -58,7 +58,6 @@ public class MushroomPredictorRestConnector implements MushroomPredictorConnecto
                 Optional.ofNullable(template.exchange(uriComponentsBuilder.toUriString(), HttpMethod.GET, entity, PredictorDTO.class).getBody())
                         .map(PredictorDTO::toMushroomPredictionBuilder)
                         .map(builder -> {
-                            builder.mushroomPredictionId(1L);
                             builder.imageUrl(blobStorageUrl);
                             builder.isEdible(true);
                             builder.mushroomHuntingId(mushroomHuntingService.getLastActiveMushroomHunting().getId());
