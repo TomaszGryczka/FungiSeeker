@@ -7,7 +7,7 @@
       <app-upper-bar [shouldShowBackButton]=false [barTitle]="title"></app-upper-bar>
       <div class="ms-3 mt-4">
         <h2>OSTATNIE</h2>
-        <div class="row">
+        <div class="row g-0">
           <h2>Grzyby</h2>
           <div class="col-6">
             <img [src]="getFirstMushroom().imageUrl" class="img-fluid" alt="Image 1">
@@ -18,7 +18,7 @@
             <p>{{getSecondMushroom().description}}</p>
           </div>
         </div>
-        <div class="row mt-4">
+        <div class="row g-0">
           <h2>Grzybobrania</h2>
           <div class="col-6">
             <img [src]="getFirstMushroomHunting().mushrooms[0].imageUrl" class="img-fluid" alt="Image 1">
