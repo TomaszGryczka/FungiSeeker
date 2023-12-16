@@ -30,12 +30,12 @@
 
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef> Nazwa</th>
-              <td mat-cell *matCellDef="let hunting"> {{hunting.name}} </td>
+              <td mat-cell class="text-break" *matCellDef="let hunting"> {{hunting.name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="weight">
               <th mat-header-cell *matHeaderCellDef> Opis</th>
-              <td mat-cell *matCellDef="let hunting"> {{hunting.description | replaceEmptyData: "—" }} </td>
+              <td mat-cell class="text-break" *matCellDef="let hunting"> {{hunting.description | replaceEmptyData: "—" }} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -73,15 +73,15 @@ export class MainMenuComponent implements OnInit {
   private initTitle(): void {
     this.auth.user().subscribe((user) => {
       this.title = "Witaj, " + user?.name + "!";
-      this.isLoading = false;
     });
   }
 
   private loadLastMushroomHunting(): void {
+    this.isLoading = true;
     this.mainMenuGateway.fetchMainMenuData().subscribe((data) => {
       this.loadedMainMenuData = data;
       this.loadingMainMenuData = false;
-      console.log(data);
+      this.isLoading = false;
     });
   }
 }
