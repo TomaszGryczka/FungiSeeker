@@ -76,6 +76,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
                             .sendMessage(
                                     new TextMessage(objectMapper.writeValueAsString(
                                             receivedMessage.toBuilder()
+                                                    .senderName(user.getName())
                                                     .createDate(savedMessage.getCreateDate().format(ChatMessageDTO.formatter))
                                                     .build())
                                     )

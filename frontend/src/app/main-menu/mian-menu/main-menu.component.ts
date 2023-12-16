@@ -4,6 +4,7 @@ import {AuthProviderService} from "../../security/auth-provider.service";
 import {Mushroom} from "../../shared/model/mushroom";
 import {MushroomHunting} from "../../shared/model/mushrom-hunting";
 import {MushroomHuntingStatus} from "../../shared/model/mushroom-hunting-status";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'main-menu',
@@ -19,7 +20,8 @@ export class MainMenuComponent implements OnInit {
   loadedMainMenuData?: MainMenuData;
 
   constructor(private mainMenuGateway: MainMenuGateway,
-              private auth: AuthProviderService) {
+              private auth: AuthProviderService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -43,6 +45,10 @@ export class MainMenuComponent implements OnInit {
   getSecondMushroomHunting(): MushroomHunting {
     const mushroomHunting = this.loadedMainMenuData?.mushroomHunting[1];
     return mushroomHunting && mushroomHunting.mushrooms.length > 0 ? mushroomHunting : this.emptyMushroomHunting();
+  }
+
+  navigateToPublicChat(): void {
+    this.router.navigate(["/chat/0"]).then();
   }
 
   private emptyMushroom(): Mushroom {
