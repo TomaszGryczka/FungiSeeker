@@ -9,10 +9,17 @@ import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { SelectPlaceModalComponent } from './select-place-modal/select-place-modal.component';
+import { SelectPlaceMapComponent } from './select-place-map/select-place-map.component';
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
-    MushroomHuntingPlaceSearchComponent
+    MushroomHuntingPlaceSearchComponent,
+    SelectPlaceModalComponent,
+    SelectPlaceMapComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +28,11 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule
   ]
 })
 export class MushroomHuntingPlaceSearchModule {

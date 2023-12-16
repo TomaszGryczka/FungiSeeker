@@ -74,6 +74,10 @@ public class AppUserService {
                 .orElse(null);
     }
 
+    public String getUserNameById(Long userId) {
+        return appUserRepository.findById(userId).map(AppUser::getName).orElse(null);
+    }
+
     public AppUser getAppUserByAuth0Id(String auth0Id) {
         return appUserRepository.findByAuth0Id(auth0Id);
     }

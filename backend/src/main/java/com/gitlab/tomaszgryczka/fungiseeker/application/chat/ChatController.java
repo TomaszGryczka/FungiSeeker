@@ -1,4 +1,4 @@
-package com.gitlab.tomaszgryczka.fungiseeker.application;
+package com.gitlab.tomaszgryczka.fungiseeker.application.chat;
 
 
 import com.gitlab.tomaszgryczka.fungiseeker.domain.chat.ChatMessage;

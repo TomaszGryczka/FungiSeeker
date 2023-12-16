@@ -23,6 +23,8 @@ public class Mushroom {
     @SequenceGenerator(name = "mushroom_id_seq", sequenceName = "mushroom_id_seq", allocationSize = 1)
     private Long id;
 
+    private Long speciesId;
+
     private String name;
     private String description;
     private Boolean isEdible;

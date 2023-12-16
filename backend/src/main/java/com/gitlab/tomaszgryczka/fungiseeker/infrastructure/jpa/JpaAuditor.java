@@ -34,9 +34,6 @@ public class JpaAuditor implements AuditorAware<Long> {
             return Optional.empty();
         }
 
-        log.info("Getting current auditor");
-
-
         return Optional.of(appUserService.getUserId());
     }
 

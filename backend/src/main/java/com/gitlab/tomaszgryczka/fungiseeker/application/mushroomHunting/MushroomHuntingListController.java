@@ -1,4 +1,4 @@
-package com.gitlab.tomaszgryczka.fungiseeker.application;
+package com.gitlab.tomaszgryczka.fungiseeker.application.mushroomHunting;
 
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.StrippedMushroomHuntingDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.HuntingListService;
