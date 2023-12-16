@@ -4,7 +4,7 @@
 <table *ngIf="!isLoading" class="table-app-container">
   <tr>
     <td style="vertical-align: top" class="p-0 h-100">
-      <app-upper-bar id="upper-bar" [shouldShowBackButton]=false barTitle="Czat"></app-upper-bar>
+      <app-upper-bar id="upper-bar" [shouldShowBackButton]=true barTitle="Czat"></app-upper-bar>
       <div id="scroller" class="row g-0" [ngStyle]="chatHeightStyle">
         <div class="col-12">
           <ng-container *ngFor="let message of messages">

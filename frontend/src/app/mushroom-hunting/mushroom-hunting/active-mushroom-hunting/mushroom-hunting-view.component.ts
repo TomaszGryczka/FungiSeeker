@@ -14,6 +14,9 @@ import {MushroomPredictionsModalComponent} from "../../mushroom-predictions-moda
 import {AuthService} from "@auth0/auth0-angular";
 import {UserGatewayService} from "../../../shared/user/user-gateway.service";
 import {MushroomHuntingStatus} from "../../../shared/model/mushroom-hunting-status";
+import {
+  MushroomHuntingStatisticsModalComponent
+} from "../../mushroom-hunting-statistics-modal/mushroom-hunting-statistics-modal.component";
 
 @Component({
   selector: 'app-mushroom-hunting-view',
@@ -57,6 +60,15 @@ export class MushroomHuntingViewComponent implements OnInit {
         this.endMushroomHunting(endMushroomHuntingModalData);
       }
     });
+  }
+
+  openStatisticsModal() {
+    const dialogRef = this.dialog.open(MushroomHuntingStatisticsModalComponent,
+      {
+        autoFocus: false,
+        data: this.mushroomHunting,
+        width: "80%",
+      });
   }
 
   openMushroomPredictionsModal(predictions: MushroomHuntingPrediction) {
@@ -113,18 +125,6 @@ export class MushroomHuntingViewComponent implements OnInit {
         this.mushroomHunting?.mushrooms.push(resp);
         this.mushroomStore.setMushrooms(this.mushroomHunting?.mushrooms || []);
       });
-  }
-
-  mushroomHuntingStatusLabel(): string {
-    if (this.mushroomHunting?.status === MushroomHuntingStatus.ACTIVE) {
-      return "AKTYWNA";
-    } else {
-      return "ZAKOŃCZONA";
-    }
-  }
-
-  getDate(date: string | undefined): string {
-    return date ? new Date(date).toLocaleString('pl-PL') : "";
   }
 
   checkHasAccess(): void {

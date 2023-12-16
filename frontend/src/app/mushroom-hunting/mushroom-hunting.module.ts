@@ -20,6 +20,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MushroomPredictionsModalComponent} from './mushroom-predictions-modal/mushroom-predictions-modal.component';
 import {MatListModule} from "@angular/material/list";
+import { MushroomHuntingStatisticsModalComponent } from './mushroom-hunting-statistics-modal/mushroom-hunting-statistics-modal.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {MatListModule} from "@angular/material/list";
     MushroomHuntingViewComponent,
     FinishedMushroomHuntingComponent,
     EndMushroomHuntingModalComponent,
-    MushroomPredictionsModalComponent
+    MushroomPredictionsModalComponent,
+    MushroomHuntingStatisticsModalComponent
   ],
   imports: [
     CommonModule,

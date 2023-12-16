@@ -1,0 +1,36 @@
+<app-loading-app *ngIf="isLoading"></app-loading-app>
+<ng-container *ngIf="!isLoading">
+  <h1 mat-dialog-title>Statystyki</h1>
+  <div mat-dialog-content>
+    <div class="row g-0">
+      <div class="col-12">
+        <mat-list>
+          <mat-list-item>
+            <span matListItemTitle>Właściciel</span>
+            <span matListItemLine>{{ userName }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Status sesji</span>
+            <span matListItemLine>{{ mushroomHuntingStatusLabel() }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Data rozpoęcia</span>
+            <span matListItemLine>{{ getDate(data.startDate) }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Data zakończenia</span>
+            <span matListItemLine>{{ getDate(data.endDate) | replaceEmptyData: "brak" }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span matListItemTitle>Liczba grzybów</span>
+            <span matListItemLine>{{data.mushrooms ? data.mushrooms.length : 0}}</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close cdkFocusInitial>Wyjdź</button>
+  </div>
+</ng-container>
+

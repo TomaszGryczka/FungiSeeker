@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -17,7 +18,9 @@ public class HuntingListService {
 
     public Collection<StrippedMushroomHuntingDTO> getAllHuntingAvailableForUser() {
         final Long userId = appUserService.getUserId();
-        return retrieveAllHuntingAvailableForUser(userId);
+        return retrieveAllHuntingAvailableForUser(userId).stream()
+                .filter(mushroomHunting -> !Objects.equals(mushroomHunting.id(), 0L))
+                .toList();
     }
 
     public Collection<StrippedMushroomHuntingDTO> getAllHuntingAvailableForUser(Long userId) {
