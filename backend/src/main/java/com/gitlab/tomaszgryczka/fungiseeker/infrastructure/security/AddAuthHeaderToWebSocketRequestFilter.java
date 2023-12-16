@@ -23,15 +23,13 @@ public class AddAuthHeaderToWebSocketRequestFilter extends OncePerRequestFilter 
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        final String authTokenCookie = request.getCookies() == null ? null : Arrays.stream(request.getCookies())
-                .filter(cookie -> cookie.getName().equals("X-Authorization"))
-                .findFirst()
-                .map(Cookie::getValue)
-                .orElse(null);
+        final String authTokenCookie = request.getParameter("token");
 
         if (Objects.nonNull(authTokenCookie)) {
             var mutableRequest = new MutableHttpServletRequest(request);
             mutableRequest.putHeader("Authorization", "Bearer " + authTokenCookie);
+
+            log.info(mutableRequest.getHeader("Authorization"));
 
             filterChain.doFilter(mutableRequest, response);
         } else {
