@@ -5,12 +5,11 @@
       <app-loading-app *ngIf="loadingMushroomHuntingList"></app-loading-app>
       <div *ngIf="!loadingMushroomHuntingList">
         <div class="mb-3">
-          <mat-card>
+          <mat-card style="box-shadow: none">
             <mat-card-header>
               <mat-card-title>Tutaj znajdziesz grzybobrania!</mat-card-title>
               <mat-card-subtitle>
-                Poniżej widoczne są Twoje grzybobrania, grzybobrania publiczne innych użytkowników
-                oraz udostępnione.
+                Poniżej widoczne są wszystkie dostępne grzybobrania.
               </mat-card-subtitle>
             </mat-card-header>
           </mat-card>
