@@ -17,6 +17,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from "@angular/material/chips";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ImageViewerModalComponent } from './image-viewer-modal/image-viewer-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     MushroomsListComponent,
     MushroomPredictionsComponent,
     ReplaceEmptyDataPipe,
-    UserMultiSelectComponent
+    UserMultiSelectComponent,
+    ImageViewerModalComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatInputModule,
     MatAutocompleteModule,
     MatChipsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   exports: [
     LoadingAppComponent,

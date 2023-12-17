@@ -17,6 +17,7 @@ import {MushroomHuntingStatus} from "../../../shared/model/mushroom-hunting-stat
 import {
   MushroomHuntingStatisticsModalComponent
 } from "../../mushroom-hunting-statistics-modal/mushroom-hunting-statistics-modal.component";
+import {ImageViewerModalComponent} from "../../../shared/image-viewer-modal/image-viewer-modal.component";
 
 @Component({
   selector: 'app-mushroom-hunting-view',
@@ -83,7 +84,6 @@ export class MushroomHuntingViewComponent implements OnInit {
       }
     });
   }
-
 
   endMushroomHunting(endMushroomHuntingModalData: EndMushroomHuntingModalData) {
     this.endingMushroomHunting = true;
