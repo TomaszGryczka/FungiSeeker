@@ -36,6 +36,7 @@ export class MushroomHuntingViewComponent implements OnInit {
   savingMushroomInfo = false;
 
   hasAccess = false;
+  isEnded = false;
 
   selectedMushroom?: Mushroom;
   deletingMushroom = false;
@@ -136,9 +137,11 @@ export class MushroomHuntingViewComponent implements OnInit {
 
     this.userGatewayService.getMe().subscribe(me => {
         if (me) {
-          this.hasAccess = mushroomHuntingOwner === me.id && mushroomHuntingStatus === MushroomHuntingStatus.ACTIVE;
+          this.hasAccess = mushroomHuntingOwner === me.id;
+          this.isEnded = mushroomHuntingStatus !== MushroomHuntingStatus.ACTIVE;
         } else {
           this.hasAccess = false;
+          this.isEnded = true;
         }
       }
     );

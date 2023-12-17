@@ -19,7 +19,7 @@
                 Zdjęcie
               </button>
               <button class="ms-1" mat-raised-button color="warn" (click)="openEndMushroomHuntingModal()"
-                      [disabled]="endingMushroomHunting">
+                      [disabled]="endingMushroomHunting" *ngIf="!isEnded">
                 <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">check_circle</mat-icon>
                 <mat-icon *ngIf="endingMushroomHunting">
                   <mat-spinner color="primary" diameter="20"></mat-spinner>
