@@ -28,7 +28,7 @@
         <div class="row g-0">
           <div class="col-10">
             <input matInput type="text" [(ngModel)]="messageToSend" class="form-control m-2" placeholder="Wpisz wiadomość"
-                   (keydown)="onEnter($event)">
+                   (keydown)="onEnter($event)" style="z-index: 1; position: sticky">
           </div>
           <div class="col-2">
             <button mat-mini-fab class="mt-2 mb-2 ms-3" color="primary" (click)="sendInputMessage()">
