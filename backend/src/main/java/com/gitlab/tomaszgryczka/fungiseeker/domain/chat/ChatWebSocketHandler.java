@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -72,15 +73,18 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
             sessionsList.forEach(se -> {
                 try {
-                    sessions.get(se.getSessionId())
-                            .sendMessage(
-                                    new TextMessage(objectMapper.writeValueAsString(
-                                            receivedMessage.toBuilder()
-                                                    .senderName(user.getName())
-                                                    .createDate(savedMessage.getCreateDate().format(ChatMessageDTO.formatter))
-                                                    .build())
-                                    )
-                            );
+                    var sess = sessions.get(se.getSessionId());
+                    if (Objects.nonNull(sess)) {
+                        sess.sendMessage(
+                                new TextMessage(objectMapper.writeValueAsString(
+                                        receivedMessage.toBuilder()
+                                                .senderName(user.getName())
+                                                .createDate(savedMessage.getCreateDate().format(ChatMessageDTO.formatter))
+                                                .build())
+                                )
+                        );
+                    }
+
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);
