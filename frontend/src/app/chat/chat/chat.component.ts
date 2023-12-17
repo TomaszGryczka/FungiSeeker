@@ -37,15 +37,15 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     const intervalId = setInterval(() => {
-      const docHeight = document.documentElement.clientHeight;
+      const docHeight = window.innerHeight;
       const lowerBarHeight = document.getElementById("lower-bar")?.offsetHeight;
       const upperBarHeight = document.getElementById("upper-bar")?.offsetHeight;
 
       if (lowerBarHeight && docHeight && upperBarHeight) {
         this.chatHeight = docHeight - (lowerBarHeight + upperBarHeight);
-        this.scrollToBottom();
 
         if (this.chatHeight) {
+          this.scrollToBottom();
           clearInterval(intervalId);
         }
       }
@@ -127,12 +127,15 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private scrollToBottom() {
-    const scroller = document.getElementById("scroller");
-    if (scroller) {
-      setTimeout(() => {
-        scroller.scrollTo(0, scroller.scrollHeight);
-      }, 100);
-    }
+    const scrollerInterval = setInterval(() => {
+      const scroller = document.getElementById("scroller");
+      if (scroller) {
+        setTimeout(() => {
+          scroller.scrollTo(0, scroller.scrollHeight);
+        }, 100);
+        clearInterval(scrollerInterval);
+      }
+    }, 100);
   }
 }
 

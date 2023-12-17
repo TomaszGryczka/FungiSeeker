@@ -12,7 +12,9 @@ export class MarkerService {
   }
 
   markMushroomsOnMap(mushrooms: Mushroom[], markers?: FeatureGroup): void {
-    markers?.clearLayers();
+    if (mushrooms && mushrooms.length > 0) {
+      markers?.clearLayers();
+    }
     if (markers) {
       mushrooms.forEach(mushroom => {
         if (mushroom.latitude && mushroom.longitude) {
@@ -26,7 +28,9 @@ export class MarkerService {
   }
 
   markHuntingOnMap(hunting: StrippedMushroomHunting[], markers?: FeatureGroup): void {
-    markers?.clearLayers();
+    if (hunting && hunting.length > 0) {
+      markers?.clearLayers();
+    }
     if (markers) {
       hunting.forEach(hunting => {
         if (hunting.coordinates && hunting.coordinates.latitude && hunting.coordinates.longitude) {
