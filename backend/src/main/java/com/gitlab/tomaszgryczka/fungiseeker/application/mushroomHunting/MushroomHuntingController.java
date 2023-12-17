@@ -1,17 +1,19 @@
 package com.gitlab.tomaszgryczka.fungiseeker.application.mushroomHunting;
 
 
-import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingDTO;
-import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomHuntingEndRequest;
-import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomPredictionDTO;
-import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.UpdateInfoDTO;
+import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.*;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingService;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingVisibility;
+import com.gitlab.tomaszgryczka.fungiseeker.domain.labels.MushroomLabels;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom.Mushroom;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.mushroom.MushroomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/mushroom-hunting")
@@ -44,5 +46,17 @@ public class MushroomHuntingController {
     @GetMapping("/{id}")
     public MushroomHuntingDTO getMushroomHunting(@PathVariable Long id) {
         return mushroomHuntingService.getMushroomHunting(id);
+    }
+
+    @DeleteMapping("/deleteMushroom/{id}")
+    public void deleteMushroom(@PathVariable Long id) {
+        mushroomService.deleteMushroom(id);
+    }
+
+    @GetMapping("/all-mushrooms")
+    public List<MushroomLabelDTO> getAllMushrooms() {
+        return MushroomLabels.mushrooms.entrySet().stream()
+                .map(entry -> MushroomLabelDTO.fromMushroomLabel(entry.getKey(), entry.getValue()))
+                .toList();
     }
 }

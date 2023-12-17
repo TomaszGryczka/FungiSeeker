@@ -3,6 +3,7 @@ package com.gitlab.tomaszgryczka.fungiseeker.application.dtos;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.coordinates.Coordinates;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHunting;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingStatus;
+import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingVisibility;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -19,6 +20,8 @@ public record MushroomHuntingDTO(
         Coordinates coordinates,
         @NotNull Long userId,
         @NotNull MushroomHuntingStatus status,
+
+        MushroomHuntingVisibility visibility,
         List<MushroomDTO> mushrooms
 ) {
     public static MushroomHuntingDTO fromMushroomHunting(final MushroomHunting mushroomHunting) {
@@ -31,6 +34,7 @@ public record MushroomHuntingDTO(
                 mushroomHunting.getCoordinates(),
                 mushroomHunting.getUserId(),
                 mushroomHunting.getMushroomHuntingStatus(),
+                mushroomHunting.getVisibility(),
                 mushroomHunting.getMushrooms().stream()
                         .map(MushroomDTO::fromMushroom)
                         .filter(Objects::nonNull)

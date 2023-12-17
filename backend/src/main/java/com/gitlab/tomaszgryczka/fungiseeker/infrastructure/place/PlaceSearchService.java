@@ -1,12 +1,10 @@
 package com.gitlab.tomaszgryczka.fungiseeker.infrastructure.place;
 
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.PlaceSearchDTO;
-import com.gitlab.tomaszgryczka.fungiseeker.domain.MushroomLabels;
+import com.gitlab.tomaszgryczka.fungiseeker.domain.labels.MushroomLabels;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.coordinates.Coordinates;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.HuntingListService;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHunting;
-import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingService;
-import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.hunting.MushroomHuntingRepository;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.user.AppUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -19,6 +19,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import {ReactiveFormsModule} from "@angular/forms";
 import { ImageViewerModalComponent } from './image-viewer-modal/image-viewer-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -32,20 +33,21 @@ import {MatDialogModule} from "@angular/material/dialog";
     UserMultiSelectComponent,
     ImageViewerModalComponent
   ],
-  imports: [
-    CommonModule,
-    MatProgressSpinnerModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatCardModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatChipsModule,
-    ReactiveFormsModule,
-    MatDialogModule
-  ],
+    imports: [
+        CommonModule,
+        MatProgressSpinnerModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTableModule,
+        MatCardModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatChipsModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatSelectModule
+    ],
   exports: [
     LoadingAppComponent,
     UpperBarComponent,

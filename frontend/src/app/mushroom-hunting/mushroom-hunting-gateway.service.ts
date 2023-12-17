@@ -39,6 +39,14 @@ export class MushroomHuntingGatewayService {
     return this.httpClient.post<Mushroom>(`${this.MUSHROOM_HUNTING_URL}/updateMushroomInfo`, updateInfo);
   }
 
+  deleteMushroom(mushroomId: number | undefined): Observable<void> {
+    if (!mushroomId) throw new Error("Mushroom id is undefined");
+    return this.httpClient.delete<void>(`${this.MUSHROOM_HUNTING_URL}/deleteMushroom/${mushroomId}`);
+  }
+
+  getAllMushrooms(): Observable<MushroomLabel[]> {
+    return this.httpClient.get<MushroomLabel[]>(`${this.MUSHROOM_HUNTING_URL}/all-mushrooms`);
+  }
 }
 
 export interface MushroomHuntingEndRequest {
@@ -49,6 +57,11 @@ export interface MushroomHuntingEndRequest {
 export interface UpdateMushroomInfoData {
   description: string | null;
   mushroomPrediction: MushroomHuntingPrediction;
+}
+export interface MushroomLabel {
+  id: number;
+  name: string;
+  isEdible: boolean;
 }
 
 

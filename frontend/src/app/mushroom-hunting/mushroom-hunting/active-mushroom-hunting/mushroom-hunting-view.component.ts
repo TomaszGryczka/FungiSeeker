@@ -17,7 +17,7 @@ import {MushroomHuntingStatus} from "../../../shared/model/mushroom-hunting-stat
 import {
   MushroomHuntingStatisticsModalComponent
 } from "../../mushroom-hunting-statistics-modal/mushroom-hunting-statistics-modal.component";
-import {ImageViewerModalComponent} from "../../../shared/image-viewer-modal/image-viewer-modal.component";
+import {Mushroom} from "../../../shared/model/mushroom";
 
 @Component({
   selector: 'app-mushroom-hunting-view',
@@ -36,6 +36,10 @@ export class MushroomHuntingViewComponent implements OnInit {
   savingMushroomInfo = false;
 
   hasAccess = false;
+  isEnded = false;
+
+  selectedMushroom?: Mushroom;
+  deletingMushroom = false;
 
   constructor(private router: Router,
               private mushroomHuntingGatewayService: MushroomHuntingGatewayService,
@@ -133,9 +137,11 @@ export class MushroomHuntingViewComponent implements OnInit {
 
     this.userGatewayService.getMe().subscribe(me => {
         if (me) {
-          this.hasAccess = mushroomHuntingOwner === me.id && mushroomHuntingStatus === MushroomHuntingStatus.ACTIVE;
+          this.hasAccess = mushroomHuntingOwner === me.id;
+          this.isEnded = mushroomHuntingStatus !== MushroomHuntingStatus.ACTIVE;
         } else {
           this.hasAccess = false;
+          this.isEnded = true;
         }
       }
     );
@@ -144,5 +150,22 @@ export class MushroomHuntingViewComponent implements OnInit {
   navigateToChat(): void {
     this.router.navigate(["/chat", this.mushroomHunting?.id]).then(() => {
     });
+  }
+
+  onSelectedMushroomChange(mushroom: Mushroom) {
+    this.selectedMushroom = mushroom;
+  }
+
+  deleteMushroom() {
+    this.deletingMushroom = true;
+    if (this.selectedMushroom) {
+      this.mushroomHuntingGatewayService.deleteMushroom(this.selectedMushroom?.id).subscribe(() => {
+        this.deletingMushroom = false;
+        if (this.mushroomHunting && this.mushroomHunting.mushrooms) {
+          this.mushroomHunting.mushrooms = this.mushroomHunting?.mushrooms.filter(mushroom => mushroom.id !== this.selectedMushroom?.id);
+          this.mushroomStore.setMushrooms(this.mushroomHunting?.mushrooms || []);
+        }
+      });
+    }
   }
 }

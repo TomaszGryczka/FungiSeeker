@@ -16,15 +16,23 @@
                 <mat-icon *ngIf="processingMushroomPhoto">
                   <mat-spinner color="primary" diameter="20"></mat-spinner>
                 </mat-icon>
-                Zrób zdjęcie
+                Zdjęcie
               </button>
               <button class="ms-1" mat-raised-button color="warn" (click)="openEndMushroomHuntingModal()"
-                      [disabled]="endingMushroomHunting">
+                      [disabled]="endingMushroomHunting" *ngIf="!isEnded">
                 <mat-icon *ngIf="!endingMushroomHunting" class="material-icons">check_circle</mat-icon>
                 <mat-icon *ngIf="endingMushroomHunting">
                   <mat-spinner color="primary" diameter="20"></mat-spinner>
                 </mat-icon>
                 Zakończ
+              </button>
+              <button class="ms-1" mat-raised-button color="warn" (click)="deleteMushroom()"
+                      [disabled]="!selectedMushroom">
+                <mat-icon *ngIf="!deletingMushroom" class="material-icons">delete</mat-icon>
+                <mat-icon *ngIf="deletingMushroom">
+                  <mat-spinner color="primary" diameter="20"></mat-spinner>
+                </mat-icon>
+                Usuń
               </button>
             </div>
           </div>
@@ -47,7 +55,7 @@
           <mat-spinner color="primary" diameter="20"></mat-spinner>
         </mat-icon>
         <ng-container *ngIf="!savingMushroomInfo">
-          <app-mushrooms-list [mushrooms]="mushroomHunting?.mushrooms"></app-mushrooms-list>
+          <app-mushrooms-list [mushrooms]="mushroomHunting?.mushrooms" (selectedMushroomChanged)="onSelectedMushroomChange($event)"></app-mushrooms-list>
         </ng-container>
       </div>
     </div>
