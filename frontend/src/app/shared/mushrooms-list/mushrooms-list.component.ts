@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Mushroom} from "../model/mushroom";
 import {MushroomPrediction} from "../model/mushroom-prediction";
 import {ImageViewerModalComponent} from "../image-viewer-modal/image-viewer-modal.component";
@@ -18,7 +18,12 @@ export class MushroomsListComponent {
   mushrooms?: Mushroom[] = [];
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
+  @Output()
+  selectedMushroomChanged = new EventEmitter<Mushroom>();
+
   shouldShowMore = false;
+
+  selectedMushroom?: Mushroom;
 
   constructor(private dialog: MatDialog,) {
   }
@@ -48,6 +53,9 @@ export class MushroomsListComponent {
   }
 
   openImageViewerModal(imageElemId: string) {
+    if (this.viewer) {
+      this.viewer.destroy();
+    }
     const img = document.getElementById(imageElemId);
     if (img) {
       this.viewer = new Viewer(img, {
@@ -55,6 +63,23 @@ export class MushroomsListComponent {
         button: true,
         zoomRatio: 0.3,
       } as Viewer.Options);
+      this.viewer.show();
+    }
+  }
+
+  onMushroomClick(mushroom: Mushroom) {
+    if (this.selectedMushroom?.id === mushroom.id) {
+      this.selectedMushroom = undefined;
+      this.selectedMushroomChanged.emit(undefined);
+    } else {
+      this.selectedMushroom = mushroom;
+      this.selectedMushroomChanged.emit(mushroom);
+    }
+  }
+
+  rowStyle(mushroom: Mushroom) {
+    return {
+      "background-color": this.selectedMushroom?.id === mushroom?.id ? "#e0e0e0" : "white"
     }
   }
 }

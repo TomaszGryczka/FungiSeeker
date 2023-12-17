@@ -45,4 +45,9 @@ public class MushroomHuntingController {
     public MushroomHuntingDTO getMushroomHunting(@PathVariable Long id) {
         return mushroomHuntingService.getMushroomHunting(id);
     }
+
+    @DeleteMapping("/deleteMushroom/{id}")
+    public void deleteMushroom(@PathVariable Long id) {
+        mushroomService.deleteMushroom(id);
+    }
 }

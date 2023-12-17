@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MushroomHunting} from "../../shared/model/mushrom-hunting";
 import {UserGatewayService} from "../../shared/user/user-gateway.service";
 import {MushroomHuntingStatus} from "../../shared/model/mushroom-hunting-status";
+import {MushroomHuntingVisibility} from "../../shared/model/mushroom-hunting-visibility";
 
 @Component({
   selector: 'app-mushroom-hunting-statistics-modal',
@@ -43,6 +44,16 @@ export class MushroomHuntingStatisticsModalComponent implements OnInit {
       return "AKTYWNA";
     } else {
       return "ZAKOŃCZONA";
+    }
+  }
+
+  mushroomHuntingVisibilityLabel(): string {
+    if (this.data?.visibility === MushroomHuntingVisibility.PUBLIC) {
+      return "PUBLICZNE";
+    } else if (this.data?.visibility === MushroomHuntingVisibility.PRIVATE) {
+      return "PRYWATNE";
+    } else {
+      return "UDOSTĘPNIONE";
     }
   }
 

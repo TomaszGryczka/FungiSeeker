@@ -12,8 +12,8 @@ export class MarkerService {
   }
 
   markMushroomsOnMap(mushrooms: Mushroom[], markers?: FeatureGroup): void {
+    markers?.clearLayers();
     if (markers) {
-
       mushrooms.forEach(mushroom => {
         if (mushroom.latitude && mushroom.longitude) {
           const newMarker = new Marker([mushroom.latitude, mushroom.longitude], {
@@ -26,6 +26,7 @@ export class MarkerService {
   }
 
   markHuntingOnMap(hunting: StrippedMushroomHunting[], markers?: FeatureGroup): void {
+    markers?.clearLayers();
     if (markers) {
       hunting.forEach(hunting => {
         if (hunting.coordinates && hunting.coordinates.latitude && hunting.coordinates.longitude) {

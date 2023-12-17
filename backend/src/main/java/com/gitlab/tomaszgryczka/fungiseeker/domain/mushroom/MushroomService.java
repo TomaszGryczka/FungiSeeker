@@ -4,6 +4,7 @@ import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.MushroomPredictionDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.application.dtos.UpdateInfoDTO;
 import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingService;
+import com.gitlab.tomaszgryczka.fungiseeker.domain.hunting.MushroomHuntingVisibility;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.blobStorage.AzureStorageAccountGateway;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.blobStorage.ImageSavingException;
 import com.gitlab.tomaszgryczka.fungiseeker.infrastructure.mushroom.MushroomRepository;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -79,5 +81,24 @@ public class MushroomService {
         return mushroomRepository.findTop2ByUserIdOrderByIdDesc(appUserService.getUserId()).stream()
                 .map(MushroomDTO::fromMushroom)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteMushroom(Long id) {
+        validateUserHasAccessToMushroom(id);
+
+        mushroomRepository.deleteById(id);
+    }
+
+    private void validateUserHasAccessToMushroom(Long mushroomId) {
+        final var userId = appUserService.getUserId();
+
+        final var mushroom = mushroomRepository.findById(mushroomId)
+                .orElseThrow(() -> new RuntimeException("Mushroom with id " + mushroomId + " not found"));
+
+        final var mushroomHunting = mushroom.getMushroomHunting();
+
+        if (!Objects.equals(userId, mushroom.getUserId())) {
+                throw new RuntimeException("User with id " + userId + " has no access to mushroom with id " + mushroomId);
+        }
     }
 }

@@ -39,6 +39,11 @@ export class MushroomHuntingGatewayService {
     return this.httpClient.post<Mushroom>(`${this.MUSHROOM_HUNTING_URL}/updateMushroomInfo`, updateInfo);
   }
 
+  deleteMushroom(mushroomId: number | undefined): Observable<void> {
+    if (!mushroomId) throw new Error("Mushroom id is undefined");
+    return this.httpClient.delete<void>(`${this.MUSHROOM_HUNTING_URL}/deleteMushroom/${mushroomId}`);
+  }
+
 }
 
 export interface MushroomHuntingEndRequest {

@@ -30,7 +30,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onMushroomClick(row)" [style]="rowStyle(row)"></tr>
     </table>
     <button *ngIf="shouldShowShowMoreButton()" mat-raised-button color="primary" (click)="toggleShowMore()"
             class="mt-2">
