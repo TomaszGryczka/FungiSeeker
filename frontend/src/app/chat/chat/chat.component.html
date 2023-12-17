@@ -1,35 +1,42 @@
-<ng-container *ngIf="isLoading">
-  <app-loading-app></app-loading-app>
-</ng-container>
 <table *ngIf="!isLoading" class="table-app-container">
   <tr>
     <td style="vertical-align: top" class="p-0 h-100">
       <app-upper-bar id="upper-bar" [shouldShowBackButton]=true barTitle="Czat"></app-upper-bar>
-      <div id="scroller" class="row g-0" [ngStyle]="chatHeightStyle">
-        <div class="col-12">
-          <ng-container *ngFor="let message of messages">
-            <div class="message">
-              <label><small>{{message.createDate | date:'HH:mm dd-MM-YYYY'}} - {{message.senderName}}</small></label>
-              <div class="mb-2">{{message.message}}</div>
-            </div>
-          </ng-container>
+      <ng-container *ngIf="isLoading">
+        <app-loading-app></app-loading-app>
+      </ng-container>
+      <ng-container *ngIf="!isLoading">
+        <div *ngIf="messages.length === 0" class="text-center mt-3">
+          <h2>Brak wiadomości.</h2>
         </div>
-      </div>
+        <div id="scroller" class="row g-0" [ngStyle]="chatHeightStyle" *ngIf="messages.length > 0">
+          <div class="col-12">
+            <ng-container *ngFor="let message of messages">
+              <div class="message">
+                <label><small>{{message.createDate | date:'HH:mm dd-MM-YYYY'}} - {{message.senderName}}</small></label>
+                <div class="mb-2">{{message.message}}</div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
     </td>
   </tr>
   <tr id="lower-bar">
     <td style="vertical-align: bottom" class="p-0">
-      <div class="row g-0">
-        <div class="col-10">
-          <input matInput type="text" [(ngModel)]="messageToSend" class="form-control m-2" placeholder="Wpisz wiadomość"
-                 (keydown)="onEnter($event)">
+      <ng-container *ngIf="!isLoading">
+        <div class="row g-0">
+          <div class="col-10">
+            <input matInput type="text" [(ngModel)]="messageToSend" class="form-control m-2" placeholder="Wpisz wiadomość"
+                   (keydown)="onEnter($event)">
+          </div>
+          <div class="col-2">
+            <button mat-mini-fab class="mt-2 mb-2 ms-3" color="primary" (click)="sendInputMessage()">
+              <mat-icon>send</mat-icon>
+            </button>
+          </div>
         </div>
-        <div class="col-2">
-          <button mat-mini-fab class="mt-2 mb-2 ms-3" color="primary" (click)="sendInputMessage()">
-            <mat-icon>send</mat-icon>
-          </button>
-        </div>
-      </div>
+      </ng-container>
       <app-lower-bar></app-lower-bar>
     </td>
   </tr>
