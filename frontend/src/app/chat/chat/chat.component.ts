@@ -43,6 +43,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
       if (lowerBarHeight && docHeight && upperBarHeight) {
         this.chatHeight = docHeight - (lowerBarHeight + upperBarHeight);
+        this.scrollToBottom();
 
         if (this.chatHeight) {
           clearInterval(intervalId);
