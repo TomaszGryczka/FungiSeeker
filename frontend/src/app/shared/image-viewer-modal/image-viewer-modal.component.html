@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Podgląd zdjęcia</h1>
+<div mat-dialog-content class="modal-body">
+  <div class="row g-0">
+    <div class="col-12">
+      <img id="img-elem" style="opacity: 0.0; overflow-y: auto" [src]="data" alt="mushroom">
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Wyjdź</button>
+</div>
