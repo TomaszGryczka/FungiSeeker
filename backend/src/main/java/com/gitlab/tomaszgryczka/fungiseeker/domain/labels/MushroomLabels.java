@@ -1,4 +1,4 @@
-package com.gitlab.tomaszgryczka.fungiseeker.domain;
+package com.gitlab.tomaszgryczka.fungiseeker.domain.labels;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

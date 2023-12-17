@@ -27,4 +27,17 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="chooseMushroom(row)" [ngClass]="{'highlight': selectedRowIndex == row.mushroomPredictionId}">></tr>
 </table>
+<p class="mt-3">... lub wybierz z listy:</p>
+<mat-form-field class="example-full-width">
+  <mat-label>Grzyb</mat-label>
+  <input type="text"
+         placeholder="Wybierz..."
+         aria-label="Grzyb"
+         matInput
+         [formControl]="mushroomControl"
+         [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async" (click)="selectedOption(option)">{{option}}</mat-option>
+  </mat-autocomplete>
+</mat-form-field>
 
