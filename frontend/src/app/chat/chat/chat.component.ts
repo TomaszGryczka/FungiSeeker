@@ -59,7 +59,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private connect() {
-    this.isLoading = true;
     if (environment.shouldAuthenticate) {
       this.auth.getAccessTokenSilently().subscribe(token => {
         this.initConnection(token);
@@ -95,10 +94,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private fetchAllMessages() {
+    this.isLoading = true;
     this.chatGatewayService.fetchChatMessages(this.chatId)
       .subscribe((message: ChatMessage[]) => {
         this.messages.push(...message);
         this.scrollToBottom();
+        this.isLoading = false;
       });
   }
 
@@ -122,8 +123,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.webSocket.onclose = (event) => {
       console.log('WebSocket Client Closed: ', event);
     }
-
-    this.isLoading = false;
   }
 
   private scrollToBottom() {
