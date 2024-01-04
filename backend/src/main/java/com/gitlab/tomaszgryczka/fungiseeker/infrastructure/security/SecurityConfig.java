@@ -2,6 +2,7 @@ package com.gitlab.tomaszgryczka.fungiseeker.infrastructure.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.web.exchanges.InMemoryHttpExchangeRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -36,6 +37,11 @@ public class SecurityConfig {
 
     @Value("${spring.security.enabled}")
     private boolean securityEnabled;
+
+    @Bean
+    public InMemoryHttpExchangeRepository createTraceRepository() {
+        return new InMemoryHttpExchangeRepository();
+    }
 
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
