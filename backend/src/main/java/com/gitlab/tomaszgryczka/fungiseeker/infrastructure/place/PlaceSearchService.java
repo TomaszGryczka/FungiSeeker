@@ -36,7 +36,8 @@ public class PlaceSearchService {
                 .filter(mh -> Objects.nonNull(mh.getCoordinates()))
                 .collect(Collectors.toMap(
                         mh -> calculateDistanceWithHaversine(userCoordinates, mh.getCoordinates()),
-                        mh -> mh
+                        mh -> mh,
+                        (mh1, mh2) -> mh1
                 ));
 
         var placesInRange = sortedByDistance.entrySet().stream()
@@ -112,7 +113,7 @@ public class PlaceSearchService {
             final Map<String, Long> mushroomCountMap = mushrooms.stream()
                     .filter(m -> Objects.nonNull(m.getSpeciesId()))
                     .collect(Collectors.groupingBy(
-                            m -> MushroomLabels.mushrooms.get(m.getSpeciesId()).getLabel(),
+                            m -> MushroomLabels.mushrooms.get(m.getSpeciesId()).getTranslation(),
                             Collectors.counting()
                     ));
 
